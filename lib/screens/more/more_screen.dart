@@ -37,7 +37,7 @@ class MoreScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.person_outline,
-                  iconBg: const Color(0xFFE3F0FD),
+                  iconBg: AppColors.primaryTint,
                   iconColor: AppColors.primary,
                   title: context.t('profile'),
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen())),
@@ -49,7 +49,7 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          _IconBox(icon: Icons.contrast, bg: const Color(0xFFEDE7F6), color: const Color(0xFF7E57C2)),
+                          const _IconBox(icon: Icons.contrast, bg: AppColors.specialTint, color: AppColors.special),
                           const SizedBox(width: 12),
                           Text(context.t('appearance'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
                         ],
@@ -75,7 +75,7 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          _IconBox(icon: Icons.translate, bg: const Color(0xFFEDE7F6), color: const Color(0xFF7E57C2)),
+                          const _IconBox(icon: Icons.translate, bg: AppColors.specialTint, color: AppColors.special),
                           const SizedBox(width: 12),
                           Text(context.t('language'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
                         ],
@@ -92,8 +92,8 @@ class MoreScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.layers_outlined,
-                  iconBg: const Color(0xFFFCEFD1),
-                  iconColor: const Color(0xFFB07D12),
+                  iconBg: AppColors.warningTint,
+                  iconColor: AppColors.warning,
                   title: context.t('app_phase'),
                   subtitle: 'Phase 2 requirements',
                   onTap: () => _info(context, context.t('app_phase'), 'Phase 2 requirements are complete.'),
@@ -102,42 +102,42 @@ class MoreScreen extends StatelessWidget {
                 SectionCard(
                   child: Row(
                     children: [
-                      _IconBox(icon: Icons.notifications_none, bg: const Color(0xFFFCEFD1), color: const Color(0xFFB07D12)),
+                      const _IconBox(icon: Icons.notifications_none, bg: AppColors.warningTint, color: AppColors.warning),
                       const SizedBox(width: 12),
                       Expanded(child: Text(context.t('visit_reminders'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16))),
-                      Switch(value: state.visitReminders, onChanged: state.setVisitReminders, activeColor: AppColors.doneFg),
+                      Switch(value: state.visitReminders, onChanged: state.setVisitReminders, activeColor: AppColors.success),
                     ],
                   ),
                 ),
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.storage_outlined,
-                  iconBg: const Color(0xFFE3F0FD),
-                  iconColor: AppColors.primary,
+                  iconBg: AppColors.infoTint,
+                  iconColor: AppColors.info,
                   title: context.t('server_connection'),
                   onTap: () => _info(context, context.t('server_connection'), 'https://acme-dist.odoo.com\nConnected'),
                 ),
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.info_outline,
-                  iconBg: const Color(0xFFE3F5E8),
-                  iconColor: AppColors.doneFg,
+                  iconBg: AppColors.successTint,
+                  iconColor: AppColors.success,
                   title: context.t('about'),
                   onTap: () => _info(context, context.t('about'), '${context.t('app_name')}\nVersion 1.0.0'),
                 ),
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.science_outlined,
-                  iconBg: const Color(0xFFEDE7F6),
-                  iconColor: const Color(0xFF7E57C2),
+                  iconBg: AppColors.specialTint,
+                  iconColor: AppColors.special,
                   title: 'Kitchen sink (dev)',
                   onTap: () => _info(context, 'Kitchen sink (dev)', 'Component playground — dev only.'),
                 ),
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.play_arrow_outlined,
-                  iconBg: const Color(0xFFFCEFD1),
-                  iconColor: const Color(0xFFB07D12),
+                  iconBg: AppColors.warningTint,
+                  iconColor: AppColors.warning,
                   title: 'Replay onboarding (dev)',
                   showChevron: false,
                   onTap: () => ScaffoldMessenger.of(context).showSnackBar(

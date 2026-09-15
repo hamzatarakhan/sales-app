@@ -66,17 +66,17 @@ class StatusBadge extends StatelessWidget {
   final Color fg;
 
   factory StatusBadge.planned(BuildContext context) =>
-      StatusBadge(text: context.t('status_planned'), bg: AppColors.planBg, fg: AppColors.planFg);
+      StatusBadge(text: context.t('status_planned'), bg: AppColors.infoTint, fg: AppColors.info);
   factory StatusBadge.done(BuildContext context) =>
-      StatusBadge(text: context.t('status_done'), bg: AppColors.doneBg, fg: AppColors.doneFg);
+      StatusBadge(text: context.t('status_done'), bg: AppColors.successTint, fg: AppColors.success);
   factory StatusBadge.invoiced(BuildContext context) =>
-      StatusBadge(text: context.t('status_invoiced'), bg: AppColors.doneBg, fg: AppColors.doneFg);
+      StatusBadge(text: context.t('status_invoiced'), bg: AppColors.successTint, fg: AppColors.success);
   factory StatusBadge.draft(BuildContext context) =>
-      StatusBadge(text: context.t('status_draft'), bg: AppColors.draftBg, fg: AppColors.draftFg);
+      StatusBadge(text: context.t('status_draft'), bg: AppColors.cardAlt, fg: AppColors.textMuted);
   factory StatusBadge.notPaid(BuildContext context) =>
-      StatusBadge(text: context.t('status_not_paid'), bg: AppColors.notPaidBg, fg: AppColors.notPaidFg);
+      StatusBadge(text: context.t('status_not_paid'), bg: AppColors.warningTint, fg: AppColors.warning);
   factory StatusBadge.paid(BuildContext context) =>
-      StatusBadge(text: context.t('status_paid'), bg: AppColors.doneBg, fg: AppColors.doneFg);
+      StatusBadge(text: context.t('status_paid'), bg: AppColors.successTint, fg: AppColors.success);
 
   @override
   Widget build(BuildContext context) {
@@ -157,14 +157,16 @@ class AppChip extends StatelessWidget {
   }
 }
 
-/// Shows a bottom sheet with the app's standard chrome: a drag handle,
-/// no Material drop shadow (soft border instead), and automatic padding
-/// for the keyboard and the bottom safe area.
+/// Shows a bottom sheet with the app's standard chrome: a top-right ✕
+/// close button (the design system's Sheet component), no Material drop
+/// shadow (soft border instead), and automatic padding for the keyboard
+/// and the bottom safe area.
 Future<T?> showAppBottomSheet<T>(
   BuildContext context, {
   required WidgetBuilder builder,
   bool isDismissible = true,
   bool isScrollControlled = false,
+  bool showCloseButton = true,
 }) {
   final isDark = Theme.of(context).brightness == Brightness.dark;
   return showModalBottomSheet<T>(
@@ -174,23 +176,28 @@ Future<T?> showAppBottomSheet<T>(
     backgroundColor: isDark ? AppColors.cardDark : AppColors.card,
     elevation: 0,
     shape: RoundedRectangleBorder(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-      side: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+      side: BorderSide(color: isDark ? AppColors.dividerDark : AppColors.divider),
     ),
     builder: (ctx) => Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 10),
-          Container(
-            width: 36,
-            height: 4,
-            decoration: BoxDecoration(
-              color: isDark ? Colors.white24 : Colors.black12,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
+          if (showCloseButton)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: Icon(Icons.close, color: isDark ? AppColors.textFaint : AppColors.textFaint, size: 20),
+                  onPressed: () => Navigator.of(ctx).pop(),
+                  visualDensity: VisualDensity.compact,
+                ),
+              ),
+            )
+          else
+            const SizedBox(height: 8),
           Flexible(child: builder(ctx)),
         ],
       ),

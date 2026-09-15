@@ -28,24 +28,91 @@ class _RootShellState extends State<RootShell> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final card = isDark ? AppColors.cardDark : AppColors.card;
+    final border = isDark ? AppColors.dividerDark : AppColors.divider;
+
+    // Each tab carries its own accent, per the design system's tab-bar spec.
+    final destinations = [
+      (
+        outline: Icons.map_outlined, filled: Icons.map, label: context.t('nav_visits'),
+        color: AppColors.primary,
+      ),
+      (
+        outline: Icons.inventory_2_outlined, filled: Icons.inventory_2, label: context.t('nav_stock'),
+        color: AppColors.special,
+      ),
+      (
+        outline: Icons.shopping_cart_outlined, filled: Icons.shopping_cart, label: context.t('nav_orders'),
+        color: AppColors.warning,
+      ),
+      (
+        outline: Icons.description_outlined, filled: Icons.description, label: context.t('nav_invoices'),
+        color: AppColors.success,
+      ),
+      (
+        outline: Icons.more_horiz, filled: Icons.more_horiz, label: context.t('nav_more'),
+        color: AppColors.info,
+      ),
+    ];
+
     return Scaffold(
       body: IndexedStack(index: _index, children: _tabs),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider)),
+        decoration: BoxDecoration(color: card, border: Border(top: BorderSide(color: border))),
+        child: SafeArea(
+          top: false,
+          child: SizedBox(
+            height: 60,
+            child: Row(
+              children: [
+                for (int i = 0; i < destinations.length; i++)
+                  Expanded(
+                    child: _TabItem(
+                      icon: i == _index ? destinations[i].filled : destinations[i].outline,
+                      label: destinations[i].label,
+                      color: destinations[i].color,
+                      selected: i == _index,
+                      onTap: () => setState(() => _index = i),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ),
-        child: NavigationBar(
-          selectedIndex: _index,
-          onDestinationSelected: (i) => setState(() => _index = i),
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-          destinations: [
-            NavigationDestination(icon: const Icon(Icons.map_outlined), label: context.t('nav_visits')),
-            NavigationDestination(icon: const Icon(Icons.inventory_2_outlined), label: context.t('nav_stock')),
-            NavigationDestination(icon: const Icon(Icons.shopping_cart_outlined), label: context.t('nav_orders')),
-            NavigationDestination(icon: const Icon(Icons.description_outlined), label: context.t('nav_invoices')),
-            NavigationDestination(icon: const Icon(Icons.more_horiz), label: context.t('nav_more')),
-          ],
-        ),
+      ),
+    );
+  }
+}
+
+class _TabItem extends StatelessWidget {
+  const _TabItem({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.selected,
+    required this.onTap,
+  });
+  final IconData icon;
+  final String label;
+  final Color color;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final fg = selected ? color : AppColors.textFaint;
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: fg, size: 24),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(color: fg, fontSize: 11, fontWeight: selected ? FontWeight.w600 : FontWeight.w500),
+          ),
+        ],
       ),
     );
   }

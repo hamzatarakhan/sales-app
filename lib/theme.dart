@@ -1,30 +1,56 @@
 import 'package:flutter/material.dart';
 
+/// Tokens copied verbatim from distributor-app's design-system.html —
+/// same family, same app. Light values are the ones actually used as
+/// constants app-wide (the app defaults to light theme); buildTheme()
+/// additionally swaps in the dark-tuned background/card/border/text
+/// tokens for dark mode.
 class AppColors {
-  static const primary = Color(0xFF3E7CB1);
+  // Brand
+  static const primary = Color(0xFF0A6EBD);
+  static const primaryTint = Color(0x1A0A6EBD);
+  static const primaryBorder = Color(0x380A6EBD);
+  static const onPrimary = Color(0xFFFFFFFF);
+
+  // Light surfaces
+  static const bg = Color(0xFFF6F7F9);
+  static const card = Color(0xFFFFFFFF);
+  static const cardAlt = Color(0xFFF1F3F5);
+  static const divider = Color(0xFFE3E6EA);
+  static const text = Color(0xFF11181C);
+  static const textMuted = Color(0xFF5B636B);
+  static const textFaint = Color(0xFF8A929A);
+
+  // Dark surfaces
+  static const bgDark = Color(0xFF0E1113);
+  static const cardDark = Color(0xFF181C1F);
+  static const cardAltDark = Color(0xFF20262A);
+  static const dividerDark = Color(0xFF2A3136);
+
+  // Tone vocabulary — success/warning/danger/info/special, each with a tint
+  static const success = Color(0xFF0F9D58);
+  static const successTint = Color(0x1F0F9D58);
+  static const warning = Color(0xFFE8A100);
+  static const warningTint = Color(0x24E8A100);
+  static const danger = Color(0xFFD7263D);
+  static const dangerTint = Color(0x1FD7263D);
+  static const info = Color(0xFF2F80ED);
+  static const infoTint = Color(0x1F2F80ED);
+  static const special = Color(0xFF8B5CF6);
+  static const specialTint = Color(0x1F8B5CF6);
+
+  static const overlay = Color(0x73000000);
+
+  // Kept for source clarity where a status badge's tone is picked by name
+  // (see StatusBadge factories in widgets/common.dart) rather than tone.
   static const primarySoft = Color(0xFFA9C7E0);
-  static const bg = Color(0xFFF5F6F8);
-  static const bgDark = Color(0xFF1C1E22);
-  static const card = Colors.white;
-  static const cardDark = Color(0xFF26292E);
-
-  static const planBg = Color(0xFFE1EDF7);
-  static const planFg = Color(0xFF3E7CB1);
-  static const doneBg = Color(0xFFE3F1E8);
-  static const doneFg = Color(0xFF4C9271);
-  static const notPaidBg = Color(0xFFFBF0DC);
-  static const notPaidFg = Color(0xFFB68A4A);
-  static const draftBg = Color(0xFFEAEBED);
-  static const draftFg = Color(0xFF767A82);
-  static const danger = Color(0xFFC96A62);
-
-  static const divider = Color(0xFFE7E8EB);
 }
 
 ThemeData buildTheme(Brightness brightness) {
   final isDark = brightness == Brightness.dark;
   final bg = isDark ? AppColors.bgDark : AppColors.bg;
   final card = isDark ? AppColors.cardDark : AppColors.card;
+  final border = isDark ? AppColors.dividerDark : AppColors.divider;
   return ThemeData(
     useMaterial3: true,
     brightness: brightness,
@@ -41,7 +67,7 @@ ThemeData buildTheme(Brightness brightness) {
       margin: EdgeInsets.zero,
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: bg,
+      backgroundColor: card,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
@@ -51,6 +77,7 @@ ThemeData buildTheme(Brightness brightness) {
         fontWeight: FontWeight.w700,
         color: isDark ? Colors.white : Colors.black,
       ),
+      shape: Border(bottom: BorderSide(color: border)),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -58,11 +85,11 @@ ThemeData buildTheme(Brightness brightness) {
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
+        borderSide: BorderSide(color: border),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
+        borderSide: BorderSide(color: border),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
@@ -72,12 +99,13 @@ ThemeData buildTheme(Brightness brightness) {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
+        foregroundColor: AppColors.onPrimary,
         disabledBackgroundColor: AppColors.primarySoft,
-        disabledForegroundColor: Colors.white,
+        disabledForegroundColor: AppColors.onPrimary,
         minimumSize: const Size.fromHeight(52),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
         elevation: 0,
       ),
     ),
@@ -85,36 +113,13 @@ ThemeData buildTheme(Brightness brightness) {
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.primary,
         minimumSize: const Size.fromHeight(52),
-        side: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        side: BorderSide(color: border),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
       ),
     ),
-    navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: card,
-      surfaceTintColor: Colors.transparent,
-      shadowColor: Colors.transparent,
-      elevation: 0,
-      height: 68,
-      indicatorColor: AppColors.primary.withOpacity(isDark ? 0.22 : 0.14),
-      indicatorShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      labelTextStyle: WidgetStateProperty.resolveWith((states) {
-        final selected = states.contains(WidgetState.selected);
-        return TextStyle(
-          fontSize: 12,
-          fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-          color: selected ? AppColors.primary : (isDark ? Colors.white60 : const Color(0xFF9AA0A8)),
-        );
-      }),
-      iconTheme: WidgetStateProperty.resolveWith((states) {
-        final selected = states.contains(WidgetState.selected);
-        return IconThemeData(
-          size: 24,
-          color: selected ? AppColors.primary : (isDark ? Colors.white60 : const Color(0xFF9AA0A8)),
-        );
-      }),
-    ),
-    dividerColor: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider,
+    dividerColor: border,
   );
 }
 
@@ -123,11 +128,11 @@ BoxDecoration cardDecoration(BuildContext context, {Color? color}) {
   return BoxDecoration(
     color: color ?? (isDark ? AppColors.cardDark : AppColors.card),
     borderRadius: BorderRadius.circular(16),
-    border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
+    border: Border.all(color: isDark ? AppColors.dividerDark : AppColors.divider),
   );
 }
 
 Border softBorder(BuildContext context) {
   final isDark = Theme.of(context).brightness == Brightness.dark;
-  return Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider);
+  return Border.all(color: isDark ? AppColors.dividerDark : AppColors.divider);
 }

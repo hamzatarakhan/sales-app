@@ -75,7 +75,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                 Container(
                   width: 44,
                   height: 44,
-                  decoration: BoxDecoration(color: AppColors.primary.withOpacity(0.12), shape: BoxShape.circle),
+                  decoration: const BoxDecoration(color: AppColors.primaryTint, shape: BoxShape.circle),
                   child: const Icon(Icons.notifications_none, color: AppColors.primary),
                 ),
               ],
@@ -111,7 +111,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                       value: '$done',
                       label: context.t('filter_done'),
                       selected: _filter == _Filter.done,
-                      color: AppColors.doneFg,
+                      color: AppColors.success,
                       onTap: () => setState(() => _filter = _Filter.done),
                     ),
                   ),
@@ -126,8 +126,8 @@ class _VisitsScreenState extends State<VisitsScreen> {
                 Expanded(
                   child: _QuickTool(
                     icon: Icons.bar_chart,
-                    iconBg: const Color(0xFFEDE7F6),
-                    iconColor: const Color(0xFF7E57C2),
+                    iconBg: AppColors.specialTint,
+                    iconColor: AppColors.special,
                     label: context.t('day_recap'),
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DayRecapScreen())),
                   ),
@@ -136,8 +136,8 @@ class _VisitsScreenState extends State<VisitsScreen> {
                 Expanded(
                   child: _QuickTool(
                     icon: Icons.map_outlined,
-                    iconBg: const Color(0xFFE3F5E8),
-                    iconColor: const Color(0xFF2E9E52),
+                    iconBg: AppColors.successTint,
+                    iconColor: AppColors.success,
                     label: context.t('visits_map'),
                     badge: remaining > 0 ? '$remaining' : null,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const VisitsMapScreen())),
@@ -147,7 +147,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                 Expanded(
                   child: _QuickTool(
                     icon: Icons.cloud_upload_outlined,
-                    iconBg: const Color(0xFFE3F0FD),
+                    iconBg: AppColors.primaryTint,
                     iconColor: AppColors.primary,
                     label: context.t('sync_queue'),
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SyncQueueScreen())),
@@ -193,7 +193,7 @@ class _StatTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: selected ? AppColors.planBg : Colors.transparent,
+          color: selected ? AppColors.infoTint : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

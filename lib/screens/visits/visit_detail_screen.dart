@@ -100,7 +100,7 @@ class VisitDetailScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     context.t('check_in_unlock'),
-                    style: const TextStyle(color: AppColors.notPaidFg, fontWeight: FontWeight.w600),
+                    style: const TextStyle(color: AppColors.warning, fontWeight: FontWeight.w600),
                   ),
                 ],
                 if (visit.checkedIn && visit.hasMerchPhoto) ...[

@@ -34,7 +34,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
                 child: Row(
                   children: [
                     Expanded(child: _Stat(value: '${visits.length}', label: context.t('stops'))),
-                    Expanded(child: _Stat(value: '$done/${visits.length}', label: context.t('status_done'), color: AppColors.doneFg)),
+                    Expanded(child: _Stat(value: '$done/${visits.length}', label: context.t('status_done'), color: AppColors.success)),
                     Expanded(child: _Stat(value: '6.8', label: context.t('km_route'))),
                   ],
                 ),
@@ -182,7 +182,7 @@ class _PinButton extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: done ? AppColors.doneFg : AppColors.primary,
+                  color: done ? AppColors.success : AppColors.primary,
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 2),
                 ),

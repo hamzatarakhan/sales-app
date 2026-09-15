@@ -18,7 +18,7 @@ class SyncQueueScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(context.t('online'), style: const TextStyle(color: AppColors.doneFg, fontWeight: FontWeight.w700)),
+                child: Text(context.t('online'), style: const TextStyle(color: AppColors.success, fontWeight: FontWeight.w700)),
               ),
             ),
             Expanded(

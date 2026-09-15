@@ -121,8 +121,8 @@ class _CheckInScreenState extends State<CheckInScreen> {
             Container(
               width: 64,
               height: 64,
-              decoration: BoxDecoration(color: AppColors.doneBg, shape: BoxShape.circle),
-              child: const Icon(Icons.check, color: AppColors.doneFg, size: 32),
+              decoration: BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
+              child: const Icon(Icons.check, color: AppColors.success, size: 32),
             ),
             const SizedBox(height: 16),
             Text(context.t('check_in_saved'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
