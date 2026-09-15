@@ -65,8 +65,8 @@ class _VanStockScreenState extends State<VanStockScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(p.name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
-                                Text(p.sku, style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+                                Text(p.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
+                                Text(p.sku, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
                               ],
                             ),
                           ),
@@ -76,9 +76,9 @@ class _VanStockScreenState extends State<VanStockScreen> {
                               Text('${p.vanStock}',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w800,
-                                      fontSize: 15,
+                                      fontSize: 13,
                                       color: p.isOut ? AppColors.danger : Colors.black87)),
-                              Text(context.t('case_unit'), style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+                              Text(context.t('case_unit'), style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
                             ],
                           ),
                           Icon(Icons.chevron_right, color: Colors.grey.shade400),

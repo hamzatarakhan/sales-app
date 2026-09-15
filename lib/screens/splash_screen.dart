@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                 position: _textSlide,
                 child: Text(
                   context.t('app_name'),
-                  style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.w700, fontSize: 22),
+                  style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.w700, fontSize: 19),
                 ),
               ),
             ),

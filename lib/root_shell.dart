@@ -62,7 +62,7 @@ class _RootShellState extends State<RootShell> {
         child: SafeArea(
           top: false,
           child: SizedBox(
-            height: 60,
+            height: 54,
             child: Row(
               children: [
                 for (int i = 0; i < destinations.length; i++)
@@ -106,11 +106,11 @@ class _TabItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: fg, size: 24),
-          const SizedBox(height: 4),
+          Icon(icon, color: fg, size: 21),
+          const SizedBox(height: 3),
           Text(
             label,
-            style: TextStyle(color: fg, fontSize: 11, fontWeight: selected ? FontWeight.w600 : FontWeight.w500),
+            style: TextStyle(color: fg, fontSize: 10, fontWeight: selected ? FontWeight.w600 : FontWeight.w500),
           ),
         ],
       ),

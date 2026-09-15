@@ -31,7 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 140),
                   const BrandIcon(size: 88),
                   const SizedBox(height: 20),
-                  Text(context.t('app_name'), style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800)),
+                  Text(context.t('app_name'), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 6),
                   Text(context.t('sign_in_subtitle'), style: TextStyle(color: Colors.grey.shade600)),
                   const SizedBox(height: 32),

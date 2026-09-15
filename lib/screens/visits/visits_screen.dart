@@ -65,7 +65,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(context.t('greeting', [state.userName.split(' ').first]),
-                          style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800)),
+                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
                       const SizedBox(height: 4),
                       Text('${_weekday[now.weekday - 1]}, ${_month[now.month - 1]} ${now.day}',
                           style: TextStyle(color: Colors.grey.shade600)),
@@ -119,7 +119,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
               ),
             ),
             const SizedBox(height: 22),
-            Text(context.t('quick_tools'), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+            Text(context.t('quick_tools'), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -156,7 +156,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
               ],
             ),
             const SizedBox(height: 22),
-            Text('${context.t('today_visits')} · $filterLabel', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+            Text('${context.t('today_visits')} · $filterLabel', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
             const SizedBox(height: 12),
             for (final v in shown) ...[
               _VisitCard(visit: v),
@@ -200,9 +200,9 @@ class _StatTile extends StatelessWidget {
           children: [
             Icon(icon, color: color, size: 20),
             const SizedBox(height: 6),
-            Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: color)),
+            Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: color)),
             const SizedBox(height: 2),
-            Text(label, style: TextStyle(color: Colors.grey.shade700, fontSize: 13)),
+            Text(label, style: TextStyle(color: Colors.grey.shade700, fontSize: 12)),
           ],
         ),
       ),
@@ -240,10 +240,10 @@ class _QuickTool extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 Container(
-                  width: 34,
-                  height: 34,
+                  width: 30,
+                  height: 30,
                   decoration: BoxDecoration(color: iconBg, borderRadius: BorderRadius.circular(10)),
-                  child: Icon(icon, color: iconColor, size: 18),
+                  child: Icon(icon, color: iconColor, size: 16),
                 ),
                 if (badge != null)
                   Positioned(
@@ -253,13 +253,13 @@ class _QuickTool extends StatelessWidget {
                       padding: const EdgeInsets.all(4),
                       decoration: const BoxDecoration(color: AppColors.danger, shape: BoxShape.circle),
                       constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
-                      child: Text(badge!, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700)),
+                      child: Text(badge!, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700)),
                     ),
                   ),
               ],
             ),
             const SizedBox(height: 8),
-            Text(label, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(label, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
           ],
         ),
       ),
@@ -283,7 +283,7 @@ class _VisitCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(visit.customerName, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                  Text(visit.customerName, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                   const SizedBox(height: 4),
                   Text('${visit.scheduledTime} · ${visit.city}', style: TextStyle(color: Colors.grey.shade600)),
                 ],

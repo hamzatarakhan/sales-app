@@ -39,20 +39,20 @@ class _RoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
-      padding: const EdgeInsets.only(left: 6),
+      padding: const EdgeInsets.only(left: 4),
       child: InkWell(
         onTap: onTap,
         customBorder: const CircleBorder(),
         child: Container(
-          width: 32,
-          height: 32,
+          width: 26,
+          height: 26,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: isDark ? Colors.white10 : Colors.white,
             shape: BoxShape.circle,
             border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
           ),
-          child: Icon(icon, size: 18),
+          child: Icon(icon, size: 15),
         ),
       ),
     );
@@ -83,7 +83,7 @@ class StatusBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(20)),
-      child: Text(text, style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 12)),
+      child: Text(text, style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 11)),
     );
   }
 }
@@ -118,9 +118,9 @@ class KeyValueRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
+          Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
           trailing ??
-              Text(value, style: valueStyle ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+              Text(value, style: valueStyle ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
         ],
       ),
     );
@@ -152,7 +152,7 @@ class AppChip extends StatelessWidget {
       labelStyle: TextStyle(
         color: selected ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
         fontWeight: FontWeight.w700,
-        fontSize: 13,
+        fontSize: 12,
       ),
       backgroundColor: isDark ? Colors.white10 : Colors.grey.shade100,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

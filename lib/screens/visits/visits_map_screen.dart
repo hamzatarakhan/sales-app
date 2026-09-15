@@ -45,7 +45,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(context.t('ordered_from_location'),
-                    style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+                    style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
               ),
             ),
             const SizedBox(height: 10),
@@ -87,7 +87,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(context.t('open_in_maps'), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+            Text(context.t('open_in_maps'), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
             const SizedBox(height: 12),
             _MapsOption(icon: Icons.map, label: 'Apple Maps', onTap: () => Navigator.pop(ctx)),
             const SizedBox(height: 10),
@@ -109,8 +109,8 @@ class _Stat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: color)),
-        Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+        Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: color)),
+        Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
       ],
     );
   }
@@ -132,7 +132,7 @@ class _MapsOption extends StatelessWidget {
           children: [
             Icon(icon, color: AppColors.primary),
             const SizedBox(width: 14),
-            Expanded(child: Text(label, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15))),
+            Expanded(child: Text(label, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13))),
             Icon(Icons.chevron_right, color: Colors.grey.shade400),
           ],
         ),
@@ -233,9 +233,9 @@ class _MapLabel extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: Colors.black87)),
+          Text(title, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: Colors.black87)),
           if (subtitle != null)
-            Text(subtitle!, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+            Text(subtitle!, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
         ],
       ),
     );
