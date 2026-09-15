@@ -120,6 +120,11 @@ ThemeData buildTheme(Brightness brightness) {
       ),
     ),
     dividerColor: border,
+    // Material 3's Divider widget reads DividerThemeData, not
+    // ThemeData.dividerColor above — without this it falls back to
+    // colorScheme.outlineVariant (a blue-tinted grey derived from the
+    // seed color) instead of the design system's flat border token.
+    dividerTheme: DividerThemeData(color: border, space: 1, thickness: 1),
   );
 }
 
