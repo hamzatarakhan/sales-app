@@ -1,0 +1,129 @@
+import 'package:flutter/material.dart';
+import '../../app_scope.dart';
+import '../../models.dart';
+import '../../theme.dart';
+import '../../widgets/common.dart';
+import 'record_payment_screen.dart';
+
+class InvoiceDetailScreen extends StatelessWidget {
+  const InvoiceDetailScreen({super.key, required this.invoice});
+  final Invoice invoice;
+
+  @override
+  Widget build(BuildContext context) {
+    final state = AppStateScope.of(context);
+    return AnimatedBuilder(
+      animation: state,
+      builder: (context, _) {
+        return Scaffold(
+          appBar: const DetailAppBar(title: 'Invoice'),
+          body: SafeArea(
+            top: false,
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(child: Text(invoice.id, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800))),
+                    invoice.status == InvoiceStatus.paid ? StatusBadge.paid() : StatusBadge.notPaid(),
+                  ],
+                ),
+                Text(invoice.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
+                const SizedBox(height: 14),
+                SectionCard(
+                  child: Column(
+                    children: [
+                      KeyValueRow('Invoice date', fmtDate(invoice.invoiceDate)),
+                      const Divider(height: 20),
+                      KeyValueRow('Due date', fmtDate(invoice.dueDate)),
+                    ],
+                  ),
+                ),
+                if (invoice.lines.isNotEmpty) ...[
+                  const SizedBox(height: 18),
+                  const Text('Lines', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+                  const SizedBox(height: 10),
+                  SectionCard(
+                    child: Column(
+                      children: [
+                        for (int i = 0; i < invoice.lines.length; i++) ...[
+                          if (i > 0) const Divider(height: 24),
+                          _LineRow(line: invoice.lines[i]),
+                        ],
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SectionCard(
+                    child: Column(
+                      children: [
+                        KeyValueRow('Untaxed', '${fmtMoney(invoice.untaxed)} JOD'),
+                        const Divider(height: 20),
+                        KeyValueRow('Tax', '${fmtMoney(invoice.tax)} JOD'),
+                        const Divider(height: 24),
+                        KeyValueRow('Total', '${fmtMoney(invoice.total)} JOD',
+                            valueStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17)),
+                        const Divider(height: 20),
+                        KeyValueRow('Amount due', '${fmtMoney(invoice.due)} JOD',
+                            valueStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17, color: AppColors.danger)),
+                      ],
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: invoice.status == InvoiceStatus.paid
+                      ? null
+                      : () => Navigator.push(context, MaterialPageRoute(builder: (_) => RecordPaymentScreen(invoice: invoice))),
+                  child: const Text('Record payment'),
+                ),
+                const SizedBox(height: 10),
+                OutlinedButton.icon(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Not available in preview')),
+                  ),
+                  icon: const Icon(Icons.description_outlined, size: 18),
+                  label: const Text('View / download PDF'),
+                ),
+                const SizedBox(height: 10),
+                OutlinedButton.icon(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Not available in preview')),
+                  ),
+                  icon: const Icon(Icons.print_outlined, size: 18),
+                  label: const Text('Print / share'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _LineRow extends StatelessWidget {
+  const _LineRow({required this.line});
+  final OrderLine line;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(line.product.name),
+              Text('${fmtMoney(line.unitPrice)} JOD', style: const TextStyle(fontWeight: FontWeight.w800)),
+            ],
+          ),
+        ),
+        Text('${line.qty} x ${line.unitPrice.toStringAsFixed(line.unitPrice.truncateToDouble() == line.unitPrice ? 0 : 1)}',
+            style: TextStyle(color: Colors.grey.shade600)),
+      ],
+    );
+  }
+}
