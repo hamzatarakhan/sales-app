@@ -44,15 +44,15 @@ class _RoundButton extends StatelessWidget {
         onTap: onTap,
         customBorder: const CircleBorder(),
         child: Container(
-          width: 26,
-          height: 26,
+          width: 22,
+          height: 22,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: isDark ? Colors.white10 : Colors.white,
             shape: BoxShape.circle,
             border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
           ),
-          child: Icon(icon, size: 15),
+          child: Icon(icon, size: 12),
         ),
       ),
     );
