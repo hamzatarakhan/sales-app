@@ -226,7 +226,7 @@ class _MapLabel extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.black12),
+        border: Border.all(color: AppColors.divider),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

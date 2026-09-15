@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const primary = Color(0xFF1565C0);
-  static const primarySoft = Color(0xFF6FA8DC);
-  static const bg = Color(0xFFF3F4F6);
-  static const bgDark = Color(0xFF17191C);
+  static const primary = Color(0xFF3E7CB1);
+  static const primarySoft = Color(0xFFA9C7E0);
+  static const bg = Color(0xFFF5F6F8);
+  static const bgDark = Color(0xFF1C1E22);
   static const card = Colors.white;
-  static const cardDark = Color(0xFF23262B);
+  static const cardDark = Color(0xFF26292E);
 
-  static const planBg = Color(0xFFDCEBFC);
-  static const planFg = Color(0xFF1565C0);
-  static const doneBg = Color(0xFFDCF5E3);
-  static const doneFg = Color(0xFF1F9254);
-  static const notPaidBg = Color(0xFFFCEFD1);
-  static const notPaidFg = Color(0xFFB07D12);
-  static const draftBg = Color(0xFFE7E8EA);
-  static const draftFg = Color(0xFF5B5F66);
-  static const danger = Color(0xFFD3392E);
+  static const planBg = Color(0xFFE1EDF7);
+  static const planFg = Color(0xFF3E7CB1);
+  static const doneBg = Color(0xFFE3F1E8);
+  static const doneFg = Color(0xFF4C9271);
+  static const notPaidBg = Color(0xFFFBF0DC);
+  static const notPaidFg = Color(0xFFB68A4A);
+  static const draftBg = Color(0xFFEAEBED);
+  static const draftFg = Color(0xFF767A82);
+  static const danger = Color(0xFFC96A62);
+
+  static const divider = Color(0xFFE7E8EB);
 }
 
 ThemeData buildTheme(Brightness brightness) {
@@ -56,11 +58,11 @@ ThemeData buildTheme(Brightness brightness) {
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: isDark ? Colors.white24 : Colors.black12),
+        borderSide: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: isDark ? Colors.white24 : Colors.black12),
+        borderSide: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
@@ -83,20 +85,36 @@ ThemeData buildTheme(Brightness brightness) {
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.primary,
         minimumSize: const Size.fromHeight(52),
-        side: BorderSide(color: isDark ? Colors.white24 : Colors.black12),
+        side: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
       ),
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    navigationBarTheme: NavigationBarThemeData(
       backgroundColor: card,
-      selectedItemColor: AppColors.primary,
-      unselectedItemColor: isDark ? Colors.white54 : const Color(0xFF8A8F98),
-      type: BottomNavigationBarType.fixed,
-      showUnselectedLabels: true,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
       elevation: 0,
+      height: 68,
+      indicatorColor: AppColors.primary.withOpacity(isDark ? 0.22 : 0.14),
+      indicatorShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      labelTextStyle: WidgetStateProperty.resolveWith((states) {
+        final selected = states.contains(WidgetState.selected);
+        return TextStyle(
+          fontSize: 12,
+          fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+          color: selected ? AppColors.primary : (isDark ? Colors.white60 : const Color(0xFF9AA0A8)),
+        );
+      }),
+      iconTheme: WidgetStateProperty.resolveWith((states) {
+        final selected = states.contains(WidgetState.selected);
+        return IconThemeData(
+          size: 24,
+          color: selected ? AppColors.primary : (isDark ? Colors.white60 : const Color(0xFF9AA0A8)),
+        );
+      }),
     ),
-    dividerColor: isDark ? Colors.white12 : Colors.black12,
+    dividerColor: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider,
   );
 }
 
@@ -105,11 +123,11 @@ BoxDecoration cardDecoration(BuildContext context, {Color? color}) {
   return BoxDecoration(
     color: color ?? (isDark ? AppColors.cardDark : AppColors.card),
     borderRadius: BorderRadius.circular(16),
-    border: Border.all(color: isDark ? Colors.white12 : Colors.black.withOpacity(0.08)),
+    border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
   );
 }
 
 Border softBorder(BuildContext context) {
   final isDark = Theme.of(context).brightness == Brightness.dark;
-  return Border.all(color: isDark ? Colors.white12 : Colors.black.withOpacity(0.08));
+  return Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider);
 }

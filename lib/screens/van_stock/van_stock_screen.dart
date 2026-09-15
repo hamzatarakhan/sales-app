@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
-import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
 import 'van_stock_detail_screen.dart';

@@ -49,7 +49,7 @@ class _RoundButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: isDark ? Colors.white10 : Colors.white,
             shape: BoxShape.circle,
-            border: Border.all(color: isDark ? Colors.white12 : Colors.black.withOpacity(0.08)),
+            border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
           ),
           child: Icon(icon, size: 22),
         ),
@@ -144,7 +144,7 @@ Future<T?> showAppBottomSheet<T>(
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-      side: BorderSide(color: isDark ? Colors.white12 : Colors.black.withOpacity(0.08)),
+      side: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
     ),
     builder: (ctx) => Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'theme.dart';
 import 'screens/visits/visits_screen.dart';
 import 'screens/van_stock/van_stock_screen.dart';
 import 'screens/orders/orders_screen.dart';
@@ -25,18 +26,25 @@ class _RootShellState extends State<RootShell> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: IndexedStack(index: _index, children: _tabs),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _index,
-        onTap: (i) => setState(() => _index = i),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: 'Visits'),
-          BottomNavigationBarItem(icon: Icon(Icons.inventory_2_outlined), label: 'Van stock'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart_outlined), label: 'Orders'),
-          BottomNavigationBarItem(icon: Icon(Icons.description_outlined), label: 'Invoices'),
-          BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'More'),
-        ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider)),
+        ),
+        child: NavigationBar(
+          selectedIndex: _index,
+          onDestinationSelected: (i) => setState(() => _index = i),
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.map_outlined), label: 'Visits'),
+            NavigationDestination(icon: Icon(Icons.inventory_2_outlined), label: 'Stock'),
+            NavigationDestination(icon: Icon(Icons.shopping_cart_outlined), label: 'Orders'),
+            NavigationDestination(icon: Icon(Icons.description_outlined), label: 'Invoices'),
+            NavigationDestination(icon: Icon(Icons.more_horiz), label: 'More'),
+          ],
+        ),
       ),
     );
   }
