@@ -78,22 +78,15 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
   }
 
   void _openInMaps(BuildContext context, Visit v) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+    showAppBottomSheet(
+      context,
       builder: (ctx) => Padding(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Open in Maps', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
-                IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(ctx)),
-              ],
-            ),
+            const Text('Open in Maps', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
             const SizedBox(height: 12),
             _MapsOption(icon: Icons.map, label: 'Apple Maps', onTap: () => Navigator.pop(ctx)),
             const SizedBox(height: 10),
@@ -191,7 +184,6 @@ class _PinButton extends StatelessWidget {
                   color: done ? AppColors.doneFg : AppColors.primary,
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 2),
-                  boxShadow: const [BoxShadow(color: Colors.black38, blurRadius: 4)],
                 ),
                 alignment: Alignment.center,
                 child: Text('${index + 1}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
@@ -234,7 +226,7 @@ class _MapLabel extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: const [BoxShadow(color: Colors.black38, blurRadius: 6, offset: Offset(0, 2))],
+        border: Border.all(color: Colors.black12),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

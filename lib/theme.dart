@@ -105,5 +105,11 @@ BoxDecoration cardDecoration(BuildContext context, {Color? color}) {
   return BoxDecoration(
     color: color ?? (isDark ? AppColors.cardDark : AppColors.card),
     borderRadius: BorderRadius.circular(16),
+    border: Border.all(color: isDark ? Colors.white12 : Colors.black.withOpacity(0.08)),
   );
+}
+
+Border softBorder(BuildContext context) {
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+  return Border.all(color: isDark ? Colors.white12 : Colors.black.withOpacity(0.08));
 }

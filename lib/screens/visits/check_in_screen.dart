@@ -109,12 +109,11 @@ class _CheckInScreenState extends State<CheckInScreen> {
   }
 
   void _showSaved(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
+    showAppBottomSheet(
+      context,
       isDismissible: false,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (ctx) => Padding(
-        padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
+        padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

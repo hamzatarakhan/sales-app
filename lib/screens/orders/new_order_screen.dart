@@ -107,14 +107,13 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   void _showSignatureSheet(BuildContext context, AppState state, SalesOrder order) {
     final key = GlobalKey<SignaturePadState>();
     bool hasSig = false;
-    showModalBottomSheet(
-      context: context,
+    showAppBottomSheet(
+      context,
       isDismissible: false,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setSheetState) => Padding(
-          padding: EdgeInsets.fromLTRB(20, 20, 20, MediaQuery.of(ctx).viewInsets.bottom + 20),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,12 +160,11 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   }
 
   void _showConfirmed(BuildContext context, Invoice invoice) {
-    showModalBottomSheet(
-      context: context,
+    showAppBottomSheet(
+      context,
       isDismissible: false,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (ctx) => Padding(
-        padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
+        padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

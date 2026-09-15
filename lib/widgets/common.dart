@@ -49,9 +49,7 @@ class _RoundButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: isDark ? Colors.white10 : Colors.white,
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 6),
-            ],
+            border: Border.all(color: isDark ? Colors.white12 : Colors.black.withOpacity(0.08)),
           ),
           child: Icon(icon, size: 22),
         ),
@@ -126,6 +124,47 @@ class KeyValueRow extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Shows a bottom sheet with the app's standard chrome: a drag handle,
+/// no Material drop shadow (soft border instead), and automatic padding
+/// for the keyboard and the bottom safe area.
+Future<T?> showAppBottomSheet<T>(
+  BuildContext context, {
+  required WidgetBuilder builder,
+  bool isDismissible = true,
+  bool isScrollControlled = false,
+}) {
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+  return showModalBottomSheet<T>(
+    context: context,
+    isDismissible: isDismissible,
+    isScrollControlled: isScrollControlled,
+    backgroundColor: isDark ? AppColors.cardDark : AppColors.card,
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+      side: BorderSide(color: isDark ? Colors.white12 : Colors.black.withOpacity(0.08)),
+    ),
+    builder: (ctx) => Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 10),
+          Container(
+            width: 36,
+            height: 4,
+            decoration: BoxDecoration(
+              color: isDark ? Colors.white24 : Colors.black12,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          Flexible(child: builder(ctx)),
+        ],
+      ),
+    ),
+  );
 }
 
 String fmtDate(DateTime d) =>

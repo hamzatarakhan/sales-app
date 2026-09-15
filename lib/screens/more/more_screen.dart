@@ -175,22 +175,15 @@ class MoreScreen extends StatelessWidget {
   }
 
   void _confirmSignOut(BuildContext context, AppState state) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+    showAppBottomSheet(
+      context,
       builder: (ctx) => Padding(
-        padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
+        padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Sign out?', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
-                IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(ctx)),
-              ],
-            ),
+            const Text('Sign out?', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
             const SizedBox(height: 4),
             Text("You'll need to sign in again to use the app.", style: TextStyle(color: Colors.grey.shade600, fontSize: 15)),
             const SizedBox(height: 20),
