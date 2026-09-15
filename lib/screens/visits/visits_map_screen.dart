@@ -87,7 +87,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(context.t('open_in_maps'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(context.t('open_in_maps'), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
             const SizedBox(height: 12),
             _MapsOption(icon: Icons.map, label: 'Apple Maps', onTap: () => Navigator.pop(ctx)),
             const SizedBox(height: 10),
@@ -109,7 +109,7 @@ class _Stat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: color)),
+        Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: color)),
         Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
       ],
     );
@@ -132,7 +132,7 @@ class _MapsOption extends StatelessWidget {
           children: [
             Icon(icon, color: AppColors.primary),
             const SizedBox(width: 14),
-            Expanded(child: Text(label, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16))),
+            Expanded(child: Text(label, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15))),
             Icon(Icons.chevron_right, color: Colors.grey.shade400),
           ],
         ),

@@ -62,7 +62,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(o.id, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+                            Text(o.id, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
                             Text('${o.customerName} · ${fmtDate(o.date)}', style: TextStyle(color: Colors.grey.shade600)),
                           ],
@@ -71,7 +71,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('${fmtMoney(o.total)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
+                          Text('${fmtMoney(o.total)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
                           const SizedBox(height: 6),
                           o.status == OrderStatus.invoiced ? StatusBadge.invoiced(context) : StatusBadge.draft(context),
                         ],

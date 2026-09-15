@@ -48,7 +48,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
               child: Column(
                 children: [
                   if (_distanceM == null) ...[
-                    Text(context.t('not_located_yet'), style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
+                    Text(context.t('not_located_yet'), style: TextStyle(color: Colors.grey.shade600, fontSize: 15)),
                   ] else ...[
                     Text(
                       '${_distanceM}m away',
@@ -125,7 +125,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
               child: const Icon(Icons.check, color: AppColors.success, size: 32),
             ),
             const SizedBox(height: 16),
-            Text(context.t('check_in_saved'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(context.t('check_in_saved'), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
             Text(
               _distanceM! > 100

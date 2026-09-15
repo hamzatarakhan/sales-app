@@ -53,6 +53,7 @@ ThemeData buildTheme(Brightness brightness) {
   final border = isDark ? AppColors.dividerDark : AppColors.divider;
   return ThemeData(
     useMaterial3: true,
+    visualDensity: VisualDensity.compact,
     brightness: brightness,
     scaffoldBackgroundColor: bg,
     colorScheme: ColorScheme.fromSeed(
@@ -72,8 +73,9 @@ ThemeData buildTheme(Brightness brightness) {
       elevation: 0,
       centerTitle: true,
       foregroundColor: isDark ? Colors.white : Colors.black,
+      toolbarHeight: 52,
       titleTextStyle: TextStyle(
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: FontWeight.w700,
         color: isDark ? Colors.white : Colors.black,
       ),
@@ -82,7 +84,7 @@ ThemeData buildTheme(Brightness brightness) {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: card,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
         borderSide: BorderSide(color: border),
@@ -102,21 +104,21 @@ ThemeData buildTheme(Brightness brightness) {
         foregroundColor: AppColors.onPrimary,
         disabledBackgroundColor: AppColors.primarySoft,
         disabledForegroundColor: AppColors.onPrimary,
-        minimumSize: const Size.fromHeight(52),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        minimumSize: const Size.fromHeight(46),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
-        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         elevation: 0,
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.primary,
-        minimumSize: const Size.fromHeight(52),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        minimumSize: const Size.fromHeight(46),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         side: BorderSide(color: border),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
-        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
       ),
     ),
     dividerColor: border,

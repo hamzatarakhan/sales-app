@@ -40,12 +40,12 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
                 children: [
                   Text(context.t('amount_due'), style: TextStyle(color: Colors.grey.shade600)),
                   const SizedBox(height: 6),
-                  Text('${fmtMoney(widget.invoice.due)} JOD', style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+                  Text('${fmtMoney(widget.invoice.due)} JOD', style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800)),
                 ],
               ),
             ),
             const SizedBox(height: 18),
-            Text(context.t('payment_method'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+            Text(context.t('payment_method'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
             const SizedBox(height: 10),
             Row(
               children: [
@@ -55,7 +55,7 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
               ],
             ),
             const SizedBox(height: 18),
-            Text(context.t('amount'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+            Text(context.t('amount'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
             const SizedBox(height: 10),
             TextField(
               controller: _amount,
@@ -94,7 +94,7 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
               child: const Icon(Icons.check, color: AppColors.success, size: 32),
             ),
             const SizedBox(height: 16),
-            Text(context.t('payment_recorded'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(context.t('payment_recorded'), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
             Text(context.t('invoice_balance_updated'), textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600)),
             const SizedBox(height: 20),

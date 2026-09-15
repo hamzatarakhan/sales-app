@@ -39,20 +39,20 @@ class _RoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
-      padding: const EdgeInsets.only(left: 8),
+      padding: const EdgeInsets.only(left: 6),
       child: InkWell(
         onTap: onTap,
         customBorder: const CircleBorder(),
         child: Container(
-          width: 40,
-          height: 40,
+          width: 32,
+          height: 32,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: isDark ? Colors.white10 : Colors.white,
             shape: BoxShape.circle,
             border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
           ),
-          child: Icon(icon, size: 22),
+          child: Icon(icon, size: 18),
         ),
       ),
     );
@@ -81,9 +81,9 @@ class StatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(20)),
-      child: Text(text, style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 13)),
+      child: Text(text, style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 12)),
     );
   }
 }
@@ -97,7 +97,7 @@ class SectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: padding ?? const EdgeInsets.all(16),
+      padding: padding ?? const EdgeInsets.all(14),
       decoration: cardDecoration(context),
       child: child,
     );
@@ -114,13 +114,13 @@ class KeyValueRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 15)),
+          Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
           trailing ??
-              Text(value, style: valueStyle ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+              Text(value, style: valueStyle ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
         ],
       ),
     );
@@ -145,10 +145,14 @@ class AppChip extends StatelessWidget {
       selected: selected,
       onSelected: (_) => onTap(),
       showCheckmark: false,
+      visualDensity: VisualDensity.compact,
+      labelPadding: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       selectedColor: AppColors.primary,
       labelStyle: TextStyle(
         color: selected ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
         fontWeight: FontWeight.w700,
+        fontSize: 13,
       ),
       backgroundColor: isDark ? Colors.white10 : Colors.grey.shade100,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

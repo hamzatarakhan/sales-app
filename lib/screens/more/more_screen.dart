@@ -51,7 +51,7 @@ class MoreScreen extends StatelessWidget {
                         children: [
                           const _IconBox(icon: Icons.contrast, bg: AppColors.specialTint, color: AppColors.special),
                           const SizedBox(width: 12),
-                          Text(context.t('appearance'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                          Text(context.t('appearance'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -77,7 +77,7 @@ class MoreScreen extends StatelessWidget {
                         children: [
                           const _IconBox(icon: Icons.translate, bg: AppColors.specialTint, color: AppColors.special),
                           const SizedBox(width: 12),
-                          Text(context.t('language'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                          Text(context.t('language'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -104,7 +104,7 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       const _IconBox(icon: Icons.notifications_none, bg: AppColors.warningTint, color: AppColors.warning),
                       const SizedBox(width: 12),
-                      Expanded(child: Text(context.t('visit_reminders'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16))),
+                      Expanded(child: Text(context.t('visit_reminders'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15))),
                       Switch(value: state.visitReminders, onChanged: state.setVisitReminders, activeColor: AppColors.success),
                     ],
                   ),
@@ -184,7 +184,7 @@ class MoreScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Sign out?', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+            const Text('Sign out?', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800)),
             const SizedBox(height: 4),
             Text("You'll need to sign in again to use the app.", style: TextStyle(color: Colors.grey.shade600, fontSize: 15)),
             const SizedBox(height: 20),
@@ -223,10 +223,10 @@ class _IconBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(10)),
-      child: Icon(icon, color: color, size: 20),
+      width: 34,
+      height: 34,
+      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(9)),
+      child: Icon(icon, color: color, size: 17),
     );
   }
 }
@@ -265,7 +265,7 @@ class _Row extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: titleColor)),
+                  Text(title, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: titleColor)),
                   if (subtitle != null) Text(subtitle!, style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
                 ],
               ),

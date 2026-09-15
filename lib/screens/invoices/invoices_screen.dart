@@ -73,7 +73,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('${invoices.length} invoices · outstanding', style: TextStyle(color: Colors.grey.shade600)),
-                  Text('${fmtMoney(outstanding)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
+                  Text('${fmtMoney(outstanding)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
                 ],
               ),
             ),
@@ -89,7 +89,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(inv.id, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+                            Text(inv.id, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
                             Text(inv.customerName, style: TextStyle(color: Colors.grey.shade600)),
                           ],
@@ -98,7 +98,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('${fmtMoney(inv.total)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
+                          Text('${fmtMoney(inv.total)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
                           Text(
                             'due ${fmtDate(inv.dueDate)}',
                             style: TextStyle(
