@@ -23,22 +23,6 @@ class _SignInScreenState extends State<SignInScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: () => _showChangeServer(context),
-                  child: Container(
-                    width: 56,
-                    height: 56,
-                    decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
-                    child: const Icon(Icons.settings, color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
             SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
