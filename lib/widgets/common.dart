@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n.dart';
 import '../theme.dart';
 
 class DetailAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -64,18 +65,18 @@ class StatusBadge extends StatelessWidget {
   final Color bg;
   final Color fg;
 
-  factory StatusBadge.planned() =>
-      const StatusBadge(text: 'Planned', bg: AppColors.planBg, fg: AppColors.planFg);
-  factory StatusBadge.done() =>
-      const StatusBadge(text: 'Done', bg: AppColors.doneBg, fg: AppColors.doneFg);
-  factory StatusBadge.invoiced() =>
-      const StatusBadge(text: 'Invoiced', bg: AppColors.doneBg, fg: AppColors.doneFg);
-  factory StatusBadge.draft() =>
-      const StatusBadge(text: 'Draft', bg: AppColors.draftBg, fg: AppColors.draftFg);
-  factory StatusBadge.notPaid() =>
-      const StatusBadge(text: 'Not paid', bg: AppColors.notPaidBg, fg: AppColors.notPaidFg);
-  factory StatusBadge.paid() =>
-      const StatusBadge(text: 'Paid', bg: AppColors.doneBg, fg: AppColors.doneFg);
+  factory StatusBadge.planned(BuildContext context) =>
+      StatusBadge(text: context.t('status_planned'), bg: AppColors.planBg, fg: AppColors.planFg);
+  factory StatusBadge.done(BuildContext context) =>
+      StatusBadge(text: context.t('status_done'), bg: AppColors.doneBg, fg: AppColors.doneFg);
+  factory StatusBadge.invoiced(BuildContext context) =>
+      StatusBadge(text: context.t('status_invoiced'), bg: AppColors.doneBg, fg: AppColors.doneFg);
+  factory StatusBadge.draft(BuildContext context) =>
+      StatusBadge(text: context.t('status_draft'), bg: AppColors.draftBg, fg: AppColors.draftFg);
+  factory StatusBadge.notPaid(BuildContext context) =>
+      StatusBadge(text: context.t('status_not_paid'), bg: AppColors.notPaidBg, fg: AppColors.notPaidFg);
+  factory StatusBadge.paid(BuildContext context) =>
+      StatusBadge(text: context.t('status_paid'), bg: AppColors.doneBg, fg: AppColors.doneFg);
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +123,36 @@ class KeyValueRow extends StatelessWidget {
               Text(value, style: valueStyle ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
         ],
       ),
+    );
+  }
+}
+
+/// A single filter/segment pill used across the app (van stock, orders,
+/// invoices filters; appearance/language segments; discount picker) —
+/// always the app's primary color when selected, never the Material3
+/// seed-derived colorScheme.primary, and no checkmark clutter.
+class AppChip extends StatelessWidget {
+  const AppChip({super.key, required this.label, required this.selected, required this.onTap});
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return ChoiceChip(
+      label: Text(label),
+      selected: selected,
+      onSelected: (_) => onTap(),
+      showCheckmark: false,
+      selectedColor: AppColors.primary,
+      labelStyle: TextStyle(
+        color: selected ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
+        fontWeight: FontWeight.w700,
+      ),
+      backgroundColor: isDark ? Colors.white10 : Colors.grey.shade100,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      side: BorderSide.none,
     );
   }
 }

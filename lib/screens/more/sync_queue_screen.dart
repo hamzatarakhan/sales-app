@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
 
@@ -8,7 +9,7 @@ class SyncQueueScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DetailAppBar(title: 'Sync queue'),
+      appBar: DetailAppBar(title: context.t('sync_queue')),
       body: SafeArea(
         top: false,
         child: Column(
@@ -17,7 +18,7 @@ class SyncQueueScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Online', style: TextStyle(color: AppColors.doneFg, fontWeight: FontWeight.w700)),
+                child: Text(context.t('online'), style: const TextStyle(color: AppColors.doneFg, fontWeight: FontWeight.w700)),
               ),
             ),
             Expanded(
@@ -27,7 +28,7 @@ class SyncQueueScreen extends StatelessWidget {
                   children: [
                     Icon(Icons.inbox_outlined, size: 48, color: Colors.grey.shade400),
                     const SizedBox(height: 12),
-                    Text('Nothing queued.', style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
+                    Text(context.t('nothing_queued'), style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
                   ],
                 ),
               ),

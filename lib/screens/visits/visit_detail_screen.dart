@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
@@ -29,7 +30,7 @@ class VisitDetailScreen extends StatelessWidget {
                     Expanded(
                       child: Text(visit.customerName, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
                     ),
-                    visit.status == VisitStatus.done ? StatusBadge.done() : StatusBadge.planned(),
+                    visit.status == VisitStatus.done ? StatusBadge.done(context) : StatusBadge.planned(context),
                   ],
                 ),
                 const SizedBox(height: 14),
@@ -82,9 +83,9 @@ class VisitDetailScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Check in', style: TextStyle(fontWeight: FontWeight.w700)),
+                              Text(context.t('check_in'), style: const TextStyle(fontWeight: FontWeight.w700)),
                               Text(
-                                visit.checkedIn ? '${visit.checkInDistanceM}m away' : 'Not checked in yet',
+                                visit.checkedIn ? '${visit.checkInDistanceM}m away' : context.t('not_checked_in'),
                                 style: TextStyle(color: Colors.grey.shade600),
                               ),
                             ],
@@ -98,8 +99,8 @@ class VisitDetailScreen extends StatelessWidget {
                 if (!visit.checkedIn) ...[
                   const SizedBox(height: 10),
                   Text(
-                    'Check in above to unlock starting an order for this visit.',
-                    style: TextStyle(color: AppColors.notPaidFg, fontWeight: FontWeight.w600),
+                    context.t('check_in_unlock'),
+                    style: const TextStyle(color: AppColors.notPaidFg, fontWeight: FontWeight.w600),
                   ),
                 ],
                 if (visit.checkedIn && visit.hasMerchPhoto) ...[
@@ -128,7 +129,7 @@ class VisitDetailScreen extends StatelessWidget {
                   onPressed: visit.checkedIn && visit.status != VisitStatus.done
                       ? () => Navigator.push(context, MaterialPageRoute(builder: (_) => NewOrderScreen(visit: visit)))
                       : null,
-                  child: const Text('Start new order'),
+                  child: Text(context.t('start_new_order')),
                 ),
                 const SizedBox(height: 12),
                 Center(
@@ -139,7 +140,7 @@ class VisitDetailScreen extends StatelessWidget {
                             Navigator.of(context).maybePop();
                           }
                         : null,
-                    child: const Text('No purchase', style: TextStyle(fontWeight: FontWeight.w700)),
+                    child: Text(context.t('no_purchase'), style: const TextStyle(fontWeight: FontWeight.w700)),
                   ),
                 ),
               ],

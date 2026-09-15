@@ -31,6 +31,10 @@ class _SalesRepAppState extends State<SalesRepApp> {
             themeMode: _state.themeMode,
             theme: buildTheme(Brightness.light),
             darkTheme: buildTheme(Brightness.dark),
+            builder: (context, child) => Directionality(
+              textDirection: _state.language == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+              child: child!,
+            ),
             home: const SplashScreen(),
           );
         },

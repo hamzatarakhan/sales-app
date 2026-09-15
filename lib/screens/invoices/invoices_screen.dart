@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
@@ -45,7 +46,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
     final outstanding = invoices.where((i) => i.status == InvoiceStatus.notPaid).fold(0.0, (s, i) => s + i.due);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Invoices')),
+      appBar: AppBar(title: Text(context.t('nav_invoices'))),
       body: SafeArea(
         top: false,
         child: ListView(
@@ -54,16 +55,16 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
             TextField(
               controller: _search,
               onChanged: (_) => setState(() {}),
-              decoration: const InputDecoration(hintText: 'Number or customer', prefixIcon: Icon(Icons.search)),
+              decoration: InputDecoration(hintText: context.t('number_or_customer'), prefixIcon: const Icon(Icons.search)),
             ),
             const SizedBox(height: 12),
             Wrap(
               spacing: 8,
               children: [
-                _FilterChip(label: 'All', selected: _filter == _Filter.all, onTap: () => setState(() => _filter = _Filter.all)),
-                _FilterChip(label: 'Open', selected: _filter == _Filter.open, onTap: () => setState(() => _filter = _Filter.open)),
-                _FilterChip(label: 'Overdue', selected: _filter == _Filter.overdue, onTap: () => setState(() => _filter = _Filter.overdue)),
-                _FilterChip(label: 'Paid', selected: _filter == _Filter.paid, onTap: () => setState(() => _filter = _Filter.paid)),
+                AppChip(label: context.t('filter_all'), selected: _filter == _Filter.all, onTap: () => setState(() => _filter = _Filter.all)),
+                AppChip(label: context.t('open'), selected: _filter == _Filter.open, onTap: () => setState(() => _filter = _Filter.open)),
+                AppChip(label: context.t('overdue'), selected: _filter == _Filter.overdue, onTap: () => setState(() => _filter = _Filter.overdue)),
+                AppChip(label: context.t('status_paid'), selected: _filter == _Filter.paid, onTap: () => setState(() => _filter = _Filter.paid)),
               ],
             ),
             const SizedBox(height: 12),
@@ -108,7 +109,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                             ),
                           ),
                           const SizedBox(height: 6),
-                          inv.status == InvoiceStatus.paid ? StatusBadge.paid() : StatusBadge.notPaid(),
+                          inv.status == InvoiceStatus.paid ? StatusBadge.paid(context) : StatusBadge.notPaid(context),
                         ],
                       ),
                       Icon(Icons.chevron_right, color: Colors.grey.shade400),
@@ -121,27 +122,6 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _FilterChip extends StatelessWidget {
-  const _FilterChip({required this.label, required this.selected, required this.onTap});
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ChoiceChip(
-      label: Text(label),
-      selected: selected,
-      onSelected: (_) => onTap(),
-      selectedColor: Theme.of(context).colorScheme.primary,
-      labelStyle: TextStyle(color: selected ? Colors.white : Colors.black87, fontWeight: FontWeight.w700),
-      backgroundColor: Colors.grey.shade100,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      side: BorderSide.none,
     );
   }
 }

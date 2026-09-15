@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
@@ -47,7 +48,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
               child: Column(
                 children: [
                   if (_distanceM == null) ...[
-                    Text('Not located yet', style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
+                    Text(context.t('not_located_yet'), style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
                   ] else ...[
                     Text(
                       '${_distanceM}m away',
@@ -60,7 +61,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                     style: OutlinedButton.styleFrom(minimumSize: const Size(180, 44)),
                     child: _locating
                         ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                        : const Text('Get my location'),
+                        : Text(context.t('get_my_location')),
                   ),
                 ],
               ),
@@ -70,7 +71,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Merchandising photo (optional)', style: TextStyle(color: Colors.grey.shade700, fontWeight: FontWeight.w600)),
+                  Text(context.t('merch_photo_optional'), style: TextStyle(color: Colors.grey.shade700, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 12),
                   if (_photo)
                     Container(
@@ -86,7 +87,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                         onPressed: () => setState(() => _photo = true),
                         style: OutlinedButton.styleFrom(minimumSize: const Size(160, 44)),
                         icon: const Icon(Icons.camera_alt_outlined, size: 18),
-                        label: const Text('Take photo'),
+                        label: Text(context.t('take_photo')),
                       ),
                     ),
                 ],
@@ -100,7 +101,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                       state.checkIn(widget.visit, _distanceM!, photo: _photo);
                       _showSaved(context);
                     },
-              child: const Text('Save check-in'),
+              child: Text(context.t('save_check_in')),
             ),
           ],
         ),
@@ -124,7 +125,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
               child: const Icon(Icons.check, color: AppColors.doneFg, size: 32),
             ),
             const SizedBox(height: 16),
-            const Text('Check-in saved', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(context.t('check_in_saved'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
             Text(
               _distanceM! > 100
@@ -141,7 +142,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                   Navigator.pop(ctx);
                   Navigator.of(context).pop();
                 },
-                child: const Text('Done'),
+                child: Text(context.t('done')),
               ),
             ),
           ],

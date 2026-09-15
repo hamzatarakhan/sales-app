@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../widgets/common.dart';
 
@@ -9,7 +10,7 @@ class VanStockDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DetailAppBar(title: 'Van stock'),
+      appBar: DetailAppBar(title: context.t('title_van_stock')),
       body: SafeArea(
         top: false,
         child: ListView(
@@ -22,9 +23,9 @@ class VanStockDetailScreen extends StatelessWidget {
             SectionCard(
               child: Column(
                 children: [
-                  KeyValueRow('Price', '${fmtMoney(product.price)} JOD'),
+                  KeyValueRow(context.t('price'), '${fmtMoney(product.price)} JOD'),
                   const Divider(height: 20),
-                  KeyValueRow('Van stock', '${product.vanStock} Case'),
+                  KeyValueRow(context.t('title_van_stock'), '${product.vanStock} ${context.t('case_unit')}'),
                 ],
               ),
             ),

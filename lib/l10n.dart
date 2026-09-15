@@ -1,0 +1,265 @@
+import 'package:flutter/material.dart';
+import 'app_scope.dart';
+
+/// Minimal hand-rolled string lookup — no codegen, no extra package.
+/// Covers the app's core chrome (nav, sign-in, dashboard, check-in/order/
+/// payment actions, status badges); screen-detail field labels not yet
+/// covered fall back to their English key.
+class Strings {
+  Strings._();
+
+  static const Map<String, String> _en = {
+    'nav_visits': 'Visits',
+    'nav_stock': 'Stock',
+    'nav_orders': 'Orders',
+    'nav_invoices': 'Invoices',
+    'nav_more': 'More',
+
+    'app_name': 'Sales Rep',
+    'sign_in_subtitle': 'Sign in to your Odoo account',
+    'username_or_email': 'Username or email',
+    'password': 'Password',
+    'sign_in': 'Sign in',
+    'change_server': 'Change server',
+    'cancel': 'Cancel',
+    'save': 'Save',
+    'ok': 'OK',
+    'done': 'Done',
+
+    'greeting': 'Hi, %s',
+    'quick_tools': 'Quick tools',
+    'today_visits': "Today's visits",
+    'day_recap': 'Day recap',
+    'visits_map': 'Visits map',
+    'sync_queue': 'Sync queue',
+    'filter_all': 'All',
+    'filter_remaining': 'Remaining',
+    'filter_done': 'Done',
+
+    'status_planned': 'Planned',
+    'status_done': 'Done',
+    'status_invoiced': 'Invoiced',
+    'status_draft': 'Draft',
+    'status_not_paid': 'Not paid',
+    'status_paid': 'Paid',
+
+    'check_in': 'Check in',
+    'start_new_order': 'Start new order',
+    'no_purchase': 'No purchase',
+    'not_checked_in': 'Not checked in yet',
+    'check_in_unlock': 'Check in above to unlock starting an order for this visit.',
+    'save_check_in': 'Save check-in',
+    'get_my_location': 'Get my location',
+    'not_located_yet': 'Not located yet',
+    'take_photo': 'Take photo',
+    'merch_photo_optional': 'Merchandising photo (optional)',
+    'check_in_saved': 'Check-in saved',
+
+    'confirm_order': 'Confirm order',
+    'customer_signature': 'Customer signature',
+    'clear': 'Clear',
+    'save_signature': 'Save signature',
+    'order_confirmed': 'Order confirmed',
+    'view_invoice': 'View invoice',
+    'create_return': 'Create return',
+
+    'record_payment': 'Record payment',
+    'save_payment': 'Save payment',
+    'payment_recorded': 'Payment recorded',
+    'invoice_balance_updated': 'The invoice balance has been updated.',
+    'amount_due': 'Amount due',
+    'payment_method': 'Payment method',
+    'amount': 'Amount',
+    'cash': 'Cash',
+    'cheque': 'Cheque',
+    'view_download_pdf': 'View / download PDF',
+    'print_share': 'Print / share',
+
+    'appearance': 'Appearance',
+    'language': 'Language',
+    'system': 'System',
+    'light': 'Light',
+    'dark': 'Dark',
+    'visit_reminders': 'Visit reminders',
+    'sign_out': 'Sign out',
+    'sign_out_confirm_title': 'Sign out?',
+    'sign_out_confirm_body': "You'll need to sign in again to use the app.",
+    'profile': 'Profile',
+    'about': 'About',
+    'server_connection': 'Server / connection',
+    'app_phase': 'App phase',
+
+    'title_van_stock': 'Van stock',
+    'title_visit': 'Visit',
+    'title_new_order': 'New order',
+    'title_order': 'Order',
+    'title_invoice': 'Invoice',
+
+    'name': 'Name',
+    'username': 'Username',
+    'email': 'Email',
+    'phone': 'Phone',
+    'company': 'Company',
+    'vehicle': 'Vehicle',
+    'online': 'Online',
+    'nothing_queued': 'Nothing queued.',
+    'price': 'Price',
+    'case_unit': 'Case',
+    'name_or_reference': 'Name or reference',
+    'low_stock': 'Low stock',
+    'out_of_stock': 'Out of stock',
+    'number_or_customer': 'Number or customer',
+    'reference_or_customer': 'Reference or customer',
+    'open': 'Open',
+    'overdue': 'Overdue',
+
+    'day_recap_subtitle': "Today's activity, for end-of-shift reconciliation.",
+    'sales': 'Sales',
+    'orders_confirmed': 'Orders confirmed',
+    'total_sales': 'Total sales',
+    'returns': 'Returns',
+    'visits_done': 'Visits done',
+    'resulted_in_order': 'Resulted in an order',
+
+    'stops': 'Stops',
+    'km_route': 'km route',
+    'ordered_from_location': 'Ordered from your current location, nearest stop first',
+    'open_in_maps': 'Open in Maps',
+    'you_are_here': 'You are here',
+  };
+
+  static const Map<String, String> _ar = {
+    'nav_visits': 'الزيارات',
+    'nav_stock': 'المخزون',
+    'nav_orders': 'الطلبات',
+    'nav_invoices': 'الفواتير',
+    'nav_more': 'المزيد',
+
+    'app_name': 'مندوب المبيعات',
+    'sign_in_subtitle': 'سجّل الدخول إلى حساب Odoo',
+    'username_or_email': 'اسم المستخدم أو البريد الإلكتروني',
+    'password': 'كلمة المرور',
+    'sign_in': 'تسجيل الدخول',
+    'change_server': 'تغيير الخادم',
+    'cancel': 'إلغاء',
+    'save': 'حفظ',
+    'ok': 'موافق',
+    'done': 'تم',
+
+    'greeting': 'مرحبًا، %s',
+    'quick_tools': 'أدوات سريعة',
+    'today_visits': 'زيارات اليوم',
+    'day_recap': 'ملخص اليوم',
+    'visits_map': 'خريطة الزيارات',
+    'sync_queue': 'قائمة المزامنة',
+    'filter_all': 'الكل',
+    'filter_remaining': 'متبقٍ',
+    'filter_done': 'منجز',
+
+    'status_planned': 'مخطط',
+    'status_done': 'منجز',
+    'status_invoiced': 'مفوتر',
+    'status_draft': 'مسودة',
+    'status_not_paid': 'غير مدفوعة',
+    'status_paid': 'مدفوعة',
+
+    'check_in': 'تسجيل الوصول',
+    'start_new_order': 'بدء طلب جديد',
+    'no_purchase': 'بدون شراء',
+    'not_checked_in': 'لم يتم تسجيل الوصول بعد',
+    'check_in_unlock': 'سجّل الوصول أعلاه لتتمكن من بدء طلب لهذه الزيارة.',
+    'save_check_in': 'حفظ تسجيل الوصول',
+    'get_my_location': 'تحديد موقعي',
+    'not_located_yet': 'لم يتم تحديد الموقع بعد',
+    'take_photo': 'التقاط صورة',
+    'merch_photo_optional': 'صورة العرض التجاري (اختياري)',
+    'check_in_saved': 'تم حفظ تسجيل الوصول',
+
+    'confirm_order': 'تأكيد الطلب',
+    'customer_signature': 'توقيع العميل',
+    'clear': 'مسح',
+    'save_signature': 'حفظ التوقيع',
+    'order_confirmed': 'تم تأكيد الطلب',
+    'view_invoice': 'عرض الفاتورة',
+    'create_return': 'إنشاء مرتجع',
+
+    'record_payment': 'تسجيل الدفعة',
+    'save_payment': 'حفظ الدفعة',
+    'payment_recorded': 'تم تسجيل الدفعة',
+    'invoice_balance_updated': 'تم تحديث رصيد الفاتورة.',
+    'amount_due': 'المبلغ المستحق',
+    'payment_method': 'طريقة الدفع',
+    'amount': 'المبلغ',
+    'cash': 'نقدًا',
+    'cheque': 'شيك',
+    'view_download_pdf': 'عرض / تنزيل PDF',
+    'print_share': 'طباعة / مشاركة',
+
+    'appearance': 'المظهر',
+    'language': 'اللغة',
+    'system': 'النظام',
+    'light': 'فاتح',
+    'dark': 'داكن',
+    'visit_reminders': 'تذكيرات الزيارات',
+    'sign_out': 'تسجيل الخروج',
+    'sign_out_confirm_title': 'تسجيل الخروج؟',
+    'sign_out_confirm_body': 'ستحتاج إلى تسجيل الدخول مرة أخرى لاستخدام التطبيق.',
+    'profile': 'الملف الشخصي',
+    'about': 'حول التطبيق',
+    'server_connection': 'الخادم / الاتصال',
+    'app_phase': 'مرحلة التطبيق',
+
+    'title_van_stock': 'مخزون السيارة',
+    'title_visit': 'الزيارة',
+    'title_new_order': 'طلب جديد',
+    'title_order': 'الطلب',
+    'title_invoice': 'الفاتورة',
+
+    'name': 'الاسم',
+    'username': 'اسم المستخدم',
+    'email': 'البريد الإلكتروني',
+    'phone': 'الهاتف',
+    'company': 'الشركة',
+    'vehicle': 'المركبة',
+    'online': 'متصل',
+    'nothing_queued': 'لا شيء في قائمة الانتظار.',
+    'price': 'السعر',
+    'case_unit': 'صندوق',
+    'name_or_reference': 'الاسم أو المرجع',
+    'low_stock': 'مخزون منخفض',
+    'out_of_stock': 'نفد المخزون',
+    'number_or_customer': 'الرقم أو العميل',
+    'reference_or_customer': 'المرجع أو العميل',
+    'open': 'مفتوحة',
+    'overdue': 'متأخرة',
+
+    'day_recap_subtitle': 'نشاط اليوم، لتسوية نهاية الوردية.',
+    'sales': 'المبيعات',
+    'orders_confirmed': 'الطلبات المؤكدة',
+    'total_sales': 'إجمالي المبيعات',
+    'returns': 'المرتجعات',
+    'visits_done': 'الزيارات المنجزة',
+    'resulted_in_order': 'أسفرت عن طلب',
+
+    'stops': 'محطات',
+    'km_route': 'كم للمسار',
+    'ordered_from_location': 'مرتبة من موقعك الحالي، أقرب محطة أولاً',
+    'open_in_maps': 'فتح في الخرائط',
+    'you_are_here': 'أنت هنا',
+  };
+
+  static String tr(BuildContext context, String key, [List<String>? args]) {
+    final lang = AppStateScope.of(context).language;
+    var s = (lang == 'ar' ? _ar[key] : null) ?? _en[key] ?? key;
+    if (args != null) {
+      for (final a in args) {
+        s = s.replaceFirst('%s', a);
+      }
+    }
+    return s;
+  }
+}
+
+extension StringsX on BuildContext {
+  String t(String key, [List<String>? args]) => Strings.tr(this, key, args);
+}

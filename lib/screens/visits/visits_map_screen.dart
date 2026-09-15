@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
@@ -22,7 +23,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
     final done = visits.where((v) => v.status == VisitStatus.done).length;
 
     return Scaffold(
-      appBar: const DetailAppBar(title: 'Visits map'),
+      appBar: DetailAppBar(title: context.t('visits_map')),
       body: SafeArea(
         top: false,
         child: Column(
@@ -32,9 +33,9 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
               child: SectionCard(
                 child: Row(
                   children: [
-                    Expanded(child: _Stat(value: '${visits.length}', label: 'Stops')),
-                    Expanded(child: _Stat(value: '$done/${visits.length}', label: 'Done', color: AppColors.doneFg)),
-                    Expanded(child: _Stat(value: '6.8', label: 'km route')),
+                    Expanded(child: _Stat(value: '${visits.length}', label: context.t('stops'))),
+                    Expanded(child: _Stat(value: '$done/${visits.length}', label: context.t('status_done'), color: AppColors.doneFg)),
+                    Expanded(child: _Stat(value: '6.8', label: context.t('km_route'))),
                   ],
                 ),
               ),
@@ -43,7 +44,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Ordered from your current location, nearest stop first',
+                child: Text(context.t('ordered_from_location'),
                     style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
               ),
             ),
@@ -86,7 +87,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Open in Maps', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(context.t('open_in_maps'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
             const SizedBox(height: 12),
             _MapsOption(icon: Icons.map, label: 'Apple Maps', onTap: () => Navigator.pop(ctx)),
             const SizedBox(height: 10),
@@ -172,7 +173,7 @@ class _PinButton extends StatelessWidget {
                 onTap: onLabelTap,
                 child: _MapLabel(
                   title: '${index + 1}. ${visit.customerName}',
-                  subtitle: '${visit.scheduledTime} · ${done ? 'Done' : 'Planned'}',
+                  subtitle: '${visit.scheduledTime} · ${done ? context.t('status_done') : context.t('status_planned')}',
                 ),
               ),
             GestureDetector(
@@ -206,7 +207,7 @@ class _MeLabel extends StatelessWidget {
       return Positioned(
         left: me.dx - 40,
         top: me.dy - 46,
-        child: const _MapLabel(title: 'You are here'),
+        child: _MapLabel(title: context.t('you_are_here')),
       );
     });
   }

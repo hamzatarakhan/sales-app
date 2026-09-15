@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../l10n.dart';
 import '../theme.dart';
+import '../widgets/brand_icon.dart';
 import 'sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -61,31 +63,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   opacity: _logoFade.value,
                   child: Transform.scale(
                     scale: _logoScale.value * _pulseScale.value,
-                    child: Container(
-                      width: 120,
-                      height: 120,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(28),
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          const Icon(Icons.location_on, color: Colors.white, size: 64),
-                          Positioned(
-                            top: 30,
-                            child: Container(
-                              width: 26,
-                              height: 26,
-                              decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                              alignment: Alignment.center,
-                              child: const Icon(Icons.check, color: AppColors.primary, size: 18),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    child: const BrandIcon(size: 120),
                   ),
                 );
               },
@@ -95,9 +73,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               opacity: _textFade,
               child: SlideTransition(
                 position: _textSlide,
-                child: const Text(
-                  'Sales Rep',
-                  style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w700, fontSize: 22),
+                child: Text(
+                  context.t('app_name'),
+                  style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.w700, fontSize: 22),
                 ),
               ),
             ),

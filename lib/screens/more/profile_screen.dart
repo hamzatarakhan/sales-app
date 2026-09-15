@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../widgets/common.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = AppStateScope.of(context);
     return Scaffold(
-      appBar: const DetailAppBar(title: 'Profile'),
+      appBar: DetailAppBar(title: context.t('profile')),
       body: SafeArea(
         top: false,
         child: ListView(
@@ -18,17 +19,17 @@ class ProfileScreen extends StatelessWidget {
             SectionCard(
               child: Column(
                 children: [
-                  KeyValueRow('Name', state.userName),
+                  KeyValueRow(context.t('name'), state.userName),
                   const Divider(height: 20),
-                  KeyValueRow('Username', state.userUsername),
+                  KeyValueRow(context.t('username'), state.userUsername),
                   const Divider(height: 20),
-                  KeyValueRow('Email', state.userEmail),
+                  KeyValueRow(context.t('email'), state.userEmail),
                   const Divider(height: 20),
-                  KeyValueRow('Phone', state.userPhone),
+                  KeyValueRow(context.t('phone'), state.userPhone),
                   const Divider(height: 20),
-                  KeyValueRow('Company', state.userCompany),
+                  KeyValueRow(context.t('company'), state.userCompany),
                   const Divider(height: 20),
-                  KeyValueRow('Vehicle', state.userVehicle),
+                  KeyValueRow(context.t('vehicle'), state.userVehicle),
                 ],
               ),
             ),

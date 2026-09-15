@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
 import '../../app_state.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
@@ -38,7 +39,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     final hasItems = _qty.values.any((q) => q > 0);
 
     return Scaffold(
-      appBar: const DetailAppBar(title: 'New order'),
+      appBar: DetailAppBar(title: context.t('title_new_order')),
       body: SafeArea(
         top: false,
         child: Column(
@@ -56,7 +57,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                   Row(
                     children: [
                       Expanded(
-                        child: TextField(decoration: const InputDecoration(hintText: 'Name or reference')),
+                        child: TextField(decoration: InputDecoration(hintText: context.t('name_or_reference'))),
                       ),
                       const SizedBox(width: 10),
                       Container(
@@ -85,7 +86,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
               child: ElevatedButton(
                 onPressed: hasItems ? () => _confirm(context, state) : null,
-                child: Text(hasItems ? 'Confirm order · ${fmtMoney(_total)} JOD' : 'Confirm order'),
+                child: Text(hasItems ? '${context.t('confirm_order')} · ${fmtMoney(_total)} JOD' : context.t('confirm_order')),
               ),
             ),
           ],
@@ -118,7 +119,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Customer signature', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+              Text(context.t('customer_signature'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
               const SizedBox(height: 8),
               Text("Have the customer sign to confirm this order before it's finalized.",
                   style: TextStyle(color: Colors.grey.shade600)),
@@ -133,7 +134,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                         key.currentState?.clear();
                         setSheetState(() => hasSig = false);
                       },
-                      child: const Text('Clear'),
+                      child: Text(context.t('clear')),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -147,7 +148,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                               _showConfirmed(context, invoice);
                             }
                           : null,
-                      child: const Text('Save signature'),
+                      child: Text(context.t('save_signature')),
                     ),
                   ),
                 ],
@@ -175,7 +176,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
               child: const Icon(Icons.check, color: AppColors.doneFg, size: 32),
             ),
             const SizedBox(height: 16),
-            const Text('Order confirmed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(context.t('order_confirmed'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
             Text('Van stock was deducted and the invoice was created.',
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600)),
@@ -190,7 +191,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) => InvoiceDetailScreen(invoice: invoice)));
                 },
-                child: const Text('View invoice'),
+                child: Text(context.t('view_invoice')),
               ),
             ),
           ],
@@ -255,17 +256,7 @@ class _ProductRow extends StatelessWidget {
                 Wrap(
                   spacing: 6,
                   children: [0, 5, 10, 15, 20].map((d) {
-                    final sel = d == discount;
-                    return ChoiceChip(
-                      label: Text('$d%'),
-                      selected: sel,
-                      onSelected: (_) => onDiscount(d),
-                      selectedColor: AppColors.primary,
-                      labelStyle: TextStyle(color: sel ? Colors.white : Colors.black87, fontWeight: FontWeight.w700),
-                      backgroundColor: Colors.grey.shade100,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      side: BorderSide.none,
-                    );
+                    return AppChip(label: '$d%', selected: d == discount, onTap: () => onDiscount(d));
                   }).toList(),
                 ),
               ],

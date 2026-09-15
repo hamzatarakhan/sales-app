@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
 import '../../app_state.dart';
+import '../../l10n.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
 import '../sign_in_screen.dart';
@@ -16,7 +17,7 @@ class MoreScreen extends StatelessWidget {
       animation: state,
       builder: (context, _) {
         return Scaffold(
-          appBar: AppBar(title: const Text('More')),
+          appBar: AppBar(title: Text(context.t('nav_more'))),
           body: SafeArea(
             top: false,
             child: ListView(
@@ -38,7 +39,7 @@ class MoreScreen extends StatelessWidget {
                   icon: Icons.person_outline,
                   iconBg: const Color(0xFFE3F0FD),
                   iconColor: AppColors.primary,
-                  title: 'Profile',
+                  title: context.t('profile'),
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen())),
                 ),
                 const SizedBox(height: 12),
@@ -50,12 +51,12 @@ class MoreScreen extends StatelessWidget {
                         children: [
                           _IconBox(icon: Icons.contrast, bg: const Color(0xFFEDE7F6), color: const Color(0xFF7E57C2)),
                           const SizedBox(width: 12),
-                          const Text('Appearance', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                          Text(context.t('appearance'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
                         ],
                       ),
                       const SizedBox(height: 12),
                       _Segmented(
-                        options: const ['System', 'Light', 'Dark'],
+                        options: {'System': context.t('system'), 'Light': context.t('light'), 'Dark': context.t('dark')},
                         selected: state.themeMode == ThemeMode.system
                             ? 'System'
                             : state.themeMode == ThemeMode.light
@@ -76,14 +77,14 @@ class MoreScreen extends StatelessWidget {
                         children: [
                           _IconBox(icon: Icons.translate, bg: const Color(0xFFEDE7F6), color: const Color(0xFF7E57C2)),
                           const SizedBox(width: 12),
-                          const Text('Language', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                          Text(context.t('language'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
                         ],
                       ),
                       const SizedBox(height: 12),
                       _Segmented(
-                        options: const ['English', 'العربية'],
-                        selected: state.language == 'en' ? 'English' : 'العربية',
-                        onSelect: (v) => state.setLanguage(v == 'English' ? 'en' : 'ar'),
+                        options: const {'en': 'English', 'ar': 'العربية'},
+                        selected: state.language,
+                        onSelect: (v) => state.setLanguage(v),
                       ),
                     ],
                   ),
@@ -93,9 +94,9 @@ class MoreScreen extends StatelessWidget {
                   icon: Icons.layers_outlined,
                   iconBg: const Color(0xFFFCEFD1),
                   iconColor: const Color(0xFFB07D12),
-                  title: 'App phase',
+                  title: context.t('app_phase'),
                   subtitle: 'Phase 2 requirements',
-                  onTap: () => _info(context, 'App phase', 'Phase 2 requirements are complete.'),
+                  onTap: () => _info(context, context.t('app_phase'), 'Phase 2 requirements are complete.'),
                 ),
                 const SizedBox(height: 12),
                 SectionCard(
@@ -103,7 +104,7 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       _IconBox(icon: Icons.notifications_none, bg: const Color(0xFFFCEFD1), color: const Color(0xFFB07D12)),
                       const SizedBox(width: 12),
-                      const Expanded(child: Text('Visit reminders', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16))),
+                      Expanded(child: Text(context.t('visit_reminders'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16))),
                       Switch(value: state.visitReminders, onChanged: state.setVisitReminders, activeColor: AppColors.doneFg),
                     ],
                   ),
@@ -113,16 +114,16 @@ class MoreScreen extends StatelessWidget {
                   icon: Icons.storage_outlined,
                   iconBg: const Color(0xFFE3F0FD),
                   iconColor: AppColors.primary,
-                  title: 'Server / connection',
-                  onTap: () => _info(context, 'Server / connection', 'https://acme-dist.odoo.com\nConnected'),
+                  title: context.t('server_connection'),
+                  onTap: () => _info(context, context.t('server_connection'), 'https://acme-dist.odoo.com\nConnected'),
                 ),
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.info_outline,
                   iconBg: const Color(0xFFE3F5E8),
                   iconColor: AppColors.doneFg,
-                  title: 'About',
-                  onTap: () => _info(context, 'About', 'Sales Rep\nVersion 1.0.0'),
+                  title: context.t('about'),
+                  onTap: () => _info(context, context.t('about'), '${context.t('app_name')}\nVersion 1.0.0'),
                 ),
                 const SizedBox(height: 12),
                 _Row(
@@ -148,7 +149,7 @@ class MoreScreen extends StatelessWidget {
                   icon: Icons.logout,
                   iconBg: const Color(0xFFFBE1DF),
                   iconColor: AppColors.danger,
-                  title: 'Sign out',
+                  title: context.t('sign_out'),
                   titleColor: AppColors.danger,
                   showChevron: false,
                   onTap: () => _confirmSignOut(context, state),
@@ -277,9 +278,10 @@ class _Row extends StatelessWidget {
   }
 }
 
+/// [options] maps a stable value (e.g. 'en') to its display label (e.g. 'English').
 class _Segmented extends StatelessWidget {
   const _Segmented({required this.options, required this.selected, required this.onSelect});
-  final List<String> options;
+  final Map<String, String> options;
   final String selected;
   final ValueChanged<String> onSelect;
 
@@ -287,18 +289,8 @@ class _Segmented extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       spacing: 8,
-      children: options.map((o) {
-        final sel = o == selected;
-        return ChoiceChip(
-          label: Text(o),
-          selected: sel,
-          onSelected: (_) => onSelect(o),
-          selectedColor: AppColors.primary,
-          labelStyle: TextStyle(color: sel ? Colors.white : Colors.black87, fontWeight: FontWeight.w700),
-          backgroundColor: Colors.grey.shade100,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          side: BorderSide.none,
-        );
+      children: options.entries.map((e) {
+        return AppChip(label: e.value, selected: e.key == selected, onTap: () => onSelect(e.key));
       }).toList(),
     );
   }

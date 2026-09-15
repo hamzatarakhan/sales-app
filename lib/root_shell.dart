@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'l10n.dart';
 import 'theme.dart';
 import 'screens/visits/visits_screen.dart';
 import 'screens/van_stock/van_stock_screen.dart';
@@ -37,12 +38,12 @@ class _RootShellState extends State<RootShell> {
           selectedIndex: _index,
           onDestinationSelected: (i) => setState(() => _index = i),
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-          destinations: const [
-            NavigationDestination(icon: Icon(Icons.map_outlined), label: 'Visits'),
-            NavigationDestination(icon: Icon(Icons.inventory_2_outlined), label: 'Stock'),
-            NavigationDestination(icon: Icon(Icons.shopping_cart_outlined), label: 'Orders'),
-            NavigationDestination(icon: Icon(Icons.description_outlined), label: 'Invoices'),
-            NavigationDestination(icon: Icon(Icons.more_horiz), label: 'More'),
+          destinations: [
+            NavigationDestination(icon: const Icon(Icons.map_outlined), label: context.t('nav_visits')),
+            NavigationDestination(icon: const Icon(Icons.inventory_2_outlined), label: context.t('nav_stock')),
+            NavigationDestination(icon: const Icon(Icons.shopping_cart_outlined), label: context.t('nav_orders')),
+            NavigationDestination(icon: const Icon(Icons.description_outlined), label: context.t('nav_invoices')),
+            NavigationDestination(icon: const Icon(Icons.more_horiz), label: context.t('nav_more')),
           ],
         ),
       ),

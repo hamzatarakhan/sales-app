@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../app_scope.dart';
+import '../l10n.dart';
 import '../root_shell.dart';
-import '../theme.dart';
+import '../widgets/brand_icon.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -28,23 +29,15 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 children: [
                   const SizedBox(height: 140),
-                  Container(
-                    width: 88,
-                    height: 88,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(22),
-                    ),
-                    child: const Icon(Icons.inventory_2, color: AppColors.primary, size: 42),
-                  ),
+                  const BrandIcon(size: 88),
                   const SizedBox(height: 20),
-                  const Text('Sales Rep', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+                  Text(context.t('app_name'), style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 6),
-                  Text('Sign in to your Odoo account', style: TextStyle(color: Colors.grey.shade600)),
+                  Text(context.t('sign_in_subtitle'), style: TextStyle(color: Colors.grey.shade600)),
                   const SizedBox(height: 32),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('Username or email', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.grey.shade800)),
+                    child: Text(context.t('username_or_email'), style: TextStyle(fontWeight: FontWeight.w600, color: Colors.grey.shade800)),
                   ),
                   const SizedBox(height: 8),
                   TextField(
@@ -55,7 +48,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 18),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('Password', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.grey.shade800)),
+                    child: Text(context.t('password'), style: TextStyle(fontWeight: FontWeight.w600, color: Colors.grey.shade800)),
                   ),
                   const SizedBox(height: 8),
                   TextField(
@@ -79,12 +72,12 @@ class _SignInScreenState extends State<SignInScreen> {
                             );
                           }
                         : null,
-                    child: const Text('Sign in'),
+                    child: Text(context.t('sign_in')),
                   ),
                   const SizedBox(height: 18),
                   TextButton(
                     onPressed: () => _showChangeServer(context),
-                    child: const Text('Change server', style: TextStyle(fontWeight: FontWeight.w700)),
+                    child: Text(context.t('change_server'), style: const TextStyle(fontWeight: FontWeight.w700)),
                   ),
                 ],
               ),
@@ -99,14 +92,14 @@ class _SignInScreenState extends State<SignInScreen> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Change server'),
+        title: Text(context.t('change_server')),
         content: TextField(
           decoration: const InputDecoration(hintText: 'https://mycompany.odoo.com'),
           controller: TextEditingController(text: 'https://acme-dist.odoo.com'),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Save')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(context.t('cancel'))),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(context.t('save'))),
         ],
       ),
     );

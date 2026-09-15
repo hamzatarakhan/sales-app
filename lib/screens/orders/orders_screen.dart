@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../widgets/common.dart';
 import 'order_detail_screen.dart';
@@ -29,7 +30,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
     if (_filter == _Filter.invoiced) orders = orders.where((o) => o.status == OrderStatus.invoiced).toList();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Orders')),
+      appBar: AppBar(title: Text(context.t('nav_orders'))),
       body: SafeArea(
         top: false,
         child: ListView(
@@ -38,15 +39,15 @@ class _OrdersScreenState extends State<OrdersScreen> {
             TextField(
               controller: _search,
               onChanged: (_) => setState(() {}),
-              decoration: const InputDecoration(hintText: 'Reference or customer', prefixIcon: Icon(Icons.search)),
+              decoration: InputDecoration(hintText: context.t('reference_or_customer'), prefixIcon: const Icon(Icons.search)),
             ),
             const SizedBox(height: 12),
             Wrap(
               spacing: 8,
               children: [
-                _FilterChip(label: 'All', selected: _filter == _Filter.all, onTap: () => setState(() => _filter = _Filter.all)),
-                _FilterChip(label: 'Draft', selected: _filter == _Filter.draft, onTap: () => setState(() => _filter = _Filter.draft)),
-                _FilterChip(label: 'Invoiced', selected: _filter == _Filter.invoiced, onTap: () => setState(() => _filter = _Filter.invoiced)),
+                AppChip(label: context.t('filter_all'), selected: _filter == _Filter.all, onTap: () => setState(() => _filter = _Filter.all)),
+                AppChip(label: context.t('status_draft'), selected: _filter == _Filter.draft, onTap: () => setState(() => _filter = _Filter.draft)),
+                AppChip(label: context.t('status_invoiced'), selected: _filter == _Filter.invoiced, onTap: () => setState(() => _filter = _Filter.invoiced)),
               ],
             ),
             const SizedBox(height: 12),
@@ -72,7 +73,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         children: [
                           Text('${fmtMoney(o.total)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
                           const SizedBox(height: 6),
-                          o.status == OrderStatus.invoiced ? StatusBadge.invoiced() : StatusBadge.draft(),
+                          o.status == OrderStatus.invoiced ? StatusBadge.invoiced(context) : StatusBadge.draft(context),
                         ],
                       ),
                       Icon(Icons.chevron_right, color: Colors.grey.shade400),
@@ -85,27 +86,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _FilterChip extends StatelessWidget {
-  const _FilterChip({required this.label, required this.selected, required this.onTap});
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ChoiceChip(
-      label: Text(label),
-      selected: selected,
-      onSelected: (_) => onTap(),
-      selectedColor: Theme.of(context).colorScheme.primary,
-      labelStyle: TextStyle(color: selected ? Colors.white : Colors.black87, fontWeight: FontWeight.w700),
-      backgroundColor: Colors.grey.shade100,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      side: BorderSide.none,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../widgets/common.dart';
 import '../invoices/invoice_detail_screen.dart';
@@ -12,7 +13,7 @@ class OrderDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = AppStateScope.of(context);
     return Scaffold(
-      appBar: const DetailAppBar(title: 'Order'),
+      appBar: DetailAppBar(title: context.t('title_order')),
       body: SafeArea(
         top: false,
         child: ListView(
@@ -22,7 +23,7 @@ class OrderDetailScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(child: Text(order.id, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800))),
-                order.status == OrderStatus.invoiced ? StatusBadge.invoiced() : StatusBadge.draft(),
+                order.status == OrderStatus.invoiced ? StatusBadge.invoiced(context) : StatusBadge.draft(context),
               ],
             ),
             Text(order.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
@@ -76,14 +77,14 @@ class OrderDetailScreen extends StatelessWidget {
                   );
                   Navigator.push(context, MaterialPageRoute(builder: (_) => InvoiceDetailScreen(invoice: inv)));
                 },
-                child: const Text('View invoice'),
+                child: Text(context.t('view_invoice')),
               ),
               const SizedBox(height: 10),
               OutlinedButton(
                 onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Not available in preview')),
                 ),
-                child: const Text('Create return'),
+                child: Text(context.t('create_return')),
               ),
             ],
           ],

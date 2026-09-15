@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
@@ -27,7 +28,7 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
     final state = AppStateScope.of(context);
     final amount = double.tryParse(_amount.text) ?? 0;
     return Scaffold(
-      appBar: const DetailAppBar(title: 'Record payment'),
+      appBar: DetailAppBar(title: context.t('record_payment')),
       body: SafeArea(
         top: false,
         child: ListView(
@@ -37,24 +38,24 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Amount due', style: TextStyle(color: Colors.grey.shade600)),
+                  Text(context.t('amount_due'), style: TextStyle(color: Colors.grey.shade600)),
                   const SizedBox(height: 6),
                   Text('${fmtMoney(widget.invoice.due)} JOD', style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                 ],
               ),
             ),
             const SizedBox(height: 18),
-            const Text('Payment method', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+            Text(context.t('payment_method'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
             const SizedBox(height: 10),
             Row(
               children: [
-                Expanded(child: _MethodBtn(label: 'Cash', selected: _method == 'Cash', onTap: () => setState(() => _method = 'Cash'))),
+                Expanded(child: _MethodBtn(label: context.t('cash'), selected: _method == 'Cash', onTap: () => setState(() => _method = 'Cash'))),
                 const SizedBox(width: 10),
-                Expanded(child: _MethodBtn(label: 'Cheque', selected: _method == 'Cheque', onTap: () => setState(() => _method = 'Cheque'))),
+                Expanded(child: _MethodBtn(label: context.t('cheque'), selected: _method == 'Cheque', onTap: () => setState(() => _method = 'Cheque'))),
               ],
             ),
             const SizedBox(height: 18),
-            const Text('Amount', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+            Text(context.t('amount'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
             const SizedBox(height: 10),
             TextField(
               controller: _amount,
@@ -69,7 +70,7 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
                       _showRecorded(context);
                     }
                   : null,
-              child: const Text('Save payment'),
+              child: Text(context.t('save_payment')),
             ),
           ],
         ),
@@ -93,9 +94,9 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
               child: const Icon(Icons.check, color: AppColors.doneFg, size: 32),
             ),
             const SizedBox(height: 16),
-            const Text('Payment recorded', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(context.t('payment_recorded'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            Text('The invoice balance has been updated.', textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600)),
+            Text(context.t('invoice_balance_updated'), textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600)),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -104,7 +105,7 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
                   Navigator.pop(ctx);
                   Navigator.of(context).pop();
                 },
-                child: const Text('Done'),
+                child: Text(context.t('done')),
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
 import 'van_stock_detail_screen.dart';
@@ -32,7 +33,7 @@ class _VanStockScreenState extends State<VanStockScreen> {
         if (_filter == _Filter.out) products = products.where((p) => p.isOut).toList();
 
         return Scaffold(
-          appBar: AppBar(title: const Text('Van stock')),
+          appBar: AppBar(title: Text(context.t('title_van_stock'))),
           body: SafeArea(
             top: false,
             child: ListView(
@@ -41,15 +42,15 @@ class _VanStockScreenState extends State<VanStockScreen> {
                 TextField(
                   controller: _search,
                   onChanged: (_) => setState(() {}),
-                  decoration: const InputDecoration(hintText: 'Name or reference', prefixIcon: Icon(Icons.search)),
+                  decoration: InputDecoration(hintText: context.t('name_or_reference'), prefixIcon: const Icon(Icons.search)),
                 ),
                 const SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
                   children: [
-                    _FilterChip(label: 'All', selected: _filter == _Filter.all, onTap: () => setState(() => _filter = _Filter.all)),
-                    _FilterChip(label: 'Low stock', selected: _filter == _Filter.low, onTap: () => setState(() => _filter = _Filter.low)),
-                    _FilterChip(label: 'Out of stock', selected: _filter == _Filter.out, onTap: () => setState(() => _filter = _Filter.out)),
+                    AppChip(label: context.t('filter_all'), selected: _filter == _Filter.all, onTap: () => setState(() => _filter = _Filter.all)),
+                    AppChip(label: context.t('low_stock'), selected: _filter == _Filter.low, onTap: () => setState(() => _filter = _Filter.low)),
+                    AppChip(label: context.t('out_of_stock'), selected: _filter == _Filter.out, onTap: () => setState(() => _filter = _Filter.out)),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -77,7 +78,7 @@ class _VanStockScreenState extends State<VanStockScreen> {
                                       fontWeight: FontWeight.w800,
                                       fontSize: 16,
                                       color: p.isOut ? AppColors.danger : Colors.black87)),
-                              Text('Case', style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+                              Text(context.t('case_unit'), style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
                             ],
                           ),
                           Icon(Icons.chevron_right, color: Colors.grey.shade400),
@@ -92,27 +93,6 @@ class _VanStockScreenState extends State<VanStockScreen> {
           ),
         );
       },
-    );
-  }
-}
-
-class _FilterChip extends StatelessWidget {
-  const _FilterChip({required this.label, required this.selected, required this.onTap});
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ChoiceChip(
-      label: Text(label),
-      selected: selected,
-      onSelected: (_) => onTap(),
-      selectedColor: Theme.of(context).colorScheme.primary,
-      labelStyle: TextStyle(color: selected ? Colors.white : Colors.black87, fontWeight: FontWeight.w700),
-      backgroundColor: Colors.grey.shade100,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      side: BorderSide.none,
     );
   }
 }

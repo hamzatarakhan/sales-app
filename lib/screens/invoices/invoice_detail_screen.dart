@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
@@ -16,7 +17,7 @@ class InvoiceDetailScreen extends StatelessWidget {
       animation: state,
       builder: (context, _) {
         return Scaffold(
-          appBar: const DetailAppBar(title: 'Invoice'),
+          appBar: DetailAppBar(title: context.t('title_invoice')),
           body: SafeArea(
             top: false,
             child: ListView(
@@ -26,7 +27,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(child: Text(invoice.id, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800))),
-                    invoice.status == InvoiceStatus.paid ? StatusBadge.paid() : StatusBadge.notPaid(),
+                    invoice.status == InvoiceStatus.paid ? StatusBadge.paid(context) : StatusBadge.notPaid(context),
                   ],
                 ),
                 Text(invoice.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 16)),
@@ -76,7 +77,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                   onPressed: invoice.status == InvoiceStatus.paid
                       ? null
                       : () => Navigator.push(context, MaterialPageRoute(builder: (_) => RecordPaymentScreen(invoice: invoice))),
-                  child: const Text('Record payment'),
+                  child: Text(context.t('record_payment')),
                 ),
                 const SizedBox(height: 10),
                 OutlinedButton.icon(
@@ -84,7 +85,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                     const SnackBar(content: Text('Not available in preview')),
                   ),
                   icon: const Icon(Icons.description_outlined, size: 18),
-                  label: const Text('View / download PDF'),
+                  label: Text(context.t('view_download_pdf')),
                 ),
                 const SizedBox(height: 10),
                 OutlinedButton.icon(
@@ -92,7 +93,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                     const SnackBar(content: Text('Not available in preview')),
                   ),
                   icon: const Icon(Icons.print_outlined, size: 18),
-                  label: const Text('Print / share'),
+                  label: Text(context.t('print_share')),
                 ),
               ],
             ),

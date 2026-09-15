@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
+import '../../l10n.dart';
 import '../../models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
@@ -37,15 +38,15 @@ class _VisitsScreenState extends State<VisitsScreen> {
     switch (_filter) {
       case _Filter.all:
         shown = visits;
-        filterLabel = 'All';
+        filterLabel = context.t('filter_all');
         break;
       case _Filter.remaining:
         shown = visits.where((v) => v.status == VisitStatus.planned).toList();
-        filterLabel = 'Remaining';
+        filterLabel = context.t('filter_remaining');
         break;
       case _Filter.done:
         shown = visits.where((v) => v.status == VisitStatus.done).toList();
-        filterLabel = 'Done';
+        filterLabel = context.t('filter_done');
         break;
     }
 
@@ -63,7 +64,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Hi, ${state.userName.split(' ').first}',
+                      Text(context.t('greeting', [state.userName.split(' ').first]),
                           style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                       const SizedBox(height: 4),
                       Text('${_weekday[now.weekday - 1]}, ${_month[now.month - 1]} ${now.day}',
@@ -88,7 +89,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                     child: _StatTile(
                       icon: Icons.calendar_today_outlined,
                       value: '${visits.length}',
-                      label: 'All',
+                      label: context.t('filter_all'),
                       selected: _filter == _Filter.all,
                       color: AppColors.primary,
                       onTap: () => setState(() => _filter = _Filter.all),
@@ -98,7 +99,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                     child: _StatTile(
                       icon: Icons.access_time,
                       value: '$remaining',
-                      label: 'Remaining',
+                      label: context.t('filter_remaining'),
                       selected: _filter == _Filter.remaining,
                       color: const Color(0xFFB07D12),
                       onTap: () => setState(() => _filter = _Filter.remaining),
@@ -108,7 +109,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                     child: _StatTile(
                       icon: Icons.check_circle_outline,
                       value: '$done',
-                      label: 'Done',
+                      label: context.t('filter_done'),
                       selected: _filter == _Filter.done,
                       color: AppColors.doneFg,
                       onTap: () => setState(() => _filter = _Filter.done),
@@ -118,7 +119,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
               ),
             ),
             const SizedBox(height: 22),
-            const Text('Quick tools', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text(context.t('quick_tools'), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -127,7 +128,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                     icon: Icons.bar_chart,
                     iconBg: const Color(0xFFEDE7F6),
                     iconColor: const Color(0xFF7E57C2),
-                    label: 'Day recap',
+                    label: context.t('day_recap'),
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DayRecapScreen())),
                   ),
                 ),
@@ -137,7 +138,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                     icon: Icons.map_outlined,
                     iconBg: const Color(0xFFE3F5E8),
                     iconColor: const Color(0xFF2E9E52),
-                    label: 'Visits map',
+                    label: context.t('visits_map'),
                     badge: remaining > 0 ? '$remaining' : null,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const VisitsMapScreen())),
                   ),
@@ -148,14 +149,14 @@ class _VisitsScreenState extends State<VisitsScreen> {
                     icon: Icons.cloud_upload_outlined,
                     iconBg: const Color(0xFFE3F0FD),
                     iconColor: AppColors.primary,
-                    label: 'Sync queue',
+                    label: context.t('sync_queue'),
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SyncQueueScreen())),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 22),
-            Text("Today's visits · $filterLabel", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            Text('${context.t('today_visits')} · $filterLabel', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
             const SizedBox(height: 12),
             for (final v in shown) ...[
               _VisitCard(visit: v),
@@ -288,7 +289,7 @@ class _VisitCard extends StatelessWidget {
                 ],
               ),
             ),
-            visit.status == VisitStatus.done ? StatusBadge.done() : StatusBadge.planned(),
+            visit.status == VisitStatus.done ? StatusBadge.done(context) : StatusBadge.planned(context),
             const SizedBox(width: 6),
             Icon(Icons.chevron_right, color: Colors.grey.shade400),
           ],
