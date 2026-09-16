@@ -27,7 +27,7 @@ class MoreScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(state.userName, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                      Text(state.userName, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                       const SizedBox(height: 4),
                       Text(state.userEmail, style: TextStyle(color: Colors.grey.shade600)),
                       Text(state.userCompany, style: TextStyle(color: Colors.grey.shade500)),
@@ -51,7 +51,7 @@ class MoreScreen extends StatelessWidget {
                         children: [
                           const _IconBox(icon: Icons.contrast, bg: AppColors.specialTint, color: AppColors.special),
                           const SizedBox(width: 12),
-                          Text(context.t('appearance'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                          Text(context.t('appearance'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -77,7 +77,7 @@ class MoreScreen extends StatelessWidget {
                         children: [
                           const _IconBox(icon: Icons.translate, bg: AppColors.specialTint, color: AppColors.special),
                           const SizedBox(width: 12),
-                          Text(context.t('language'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                          Text(context.t('language'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -104,7 +104,7 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       const _IconBox(icon: Icons.notifications_none, bg: AppColors.warningTint, color: AppColors.warning),
                       const SizedBox(width: 12),
-                      Expanded(child: Text(context.t('visit_reminders'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13))),
+                      Expanded(child: Text(context.t('visit_reminders'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12))),
                       Switch(value: state.visitReminders, onChanged: state.setVisitReminders, activeColor: AppColors.success),
                     ],
                   ),
@@ -184,9 +184,9 @@ class MoreScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Sign out?', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+            const Text('Sign out?', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 4),
-            Text("You'll need to sign in again to use the app.", style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+            Text("You'll need to sign in again to use the app.", style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: AppColors.danger),
@@ -265,8 +265,8 @@ class _Row extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: titleColor)),
-                  if (subtitle != null) Text(subtitle!, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                  Text(title, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: titleColor)),
+                  if (subtitle != null) Text(subtitle!, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
                 ],
               ),
             ),

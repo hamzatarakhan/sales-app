@@ -85,6 +85,9 @@ ThemeData buildTheme(Brightness brightness) {
       filled: true,
       fillColor: card,
       contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+      hintStyle: const TextStyle(color: AppColors.textFaint, fontSize: 13, fontWeight: FontWeight.w400),
+      prefixIconColor: AppColors.textFaint,
+      suffixIconColor: AppColors.textFaint,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
         borderSide: BorderSide(color: border),
@@ -97,6 +100,16 @@ ThemeData buildTheme(Brightness brightness) {
         borderRadius: BorderRadius.circular(14),
         borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
       ),
+    ),
+    switchTheme: SwitchThemeData(
+      // Every other "active" control in the app (chips, segmented
+      // pickers, selected rows) uses the accent color when on -- the
+      // Switch should follow the same rule instead of a one-off green.
+      thumbColor: const WidgetStatePropertyAll(AppColors.onPrimary),
+      trackColor: WidgetStateProperty.resolveWith((states) =>
+          states.contains(WidgetState.selected) ? AppColors.primary : (isDark ? AppColors.cardAltDark : AppColors.cardAlt)),
+      trackOutlineColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected) ? Colors.transparent : border),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(

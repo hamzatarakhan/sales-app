@@ -16,7 +16,7 @@ class VanStockDetailScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
           children: [
-            Text(product.name, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+            Text(product.name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 4),
             Text(product.sku, style: TextStyle(color: Colors.grey.shade600)),
             const SizedBox(height: 14),

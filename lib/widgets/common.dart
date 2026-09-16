@@ -129,9 +129,9 @@ class KeyValueRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+          Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
           trailing ??
-              Text(value, style: valueStyle ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
+              Text(value, style: valueStyle ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 11)),
         ],
       ),
     );
@@ -152,10 +152,14 @@ class AppChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final border = isDark ? AppColors.dividerDark : AppColors.divider;
-    final card = isDark ? AppColors.cardDark : AppColors.card;
+    // Unselected fill is surface-alt, not surface (card) -- against a
+    // white card and a near-white page background, a white chip read
+    // as invisible until you noticed the 1px border. surface-alt gives
+    // it real presence while staying a real design-system token.
+    final unselectedBg = isDark ? AppColors.cardAltDark : AppColors.cardAlt;
     // design-system.html .m-chip, applied literally: padding: 8px 16px;
     // border-radius: 999px; font-size: 13px; font-weight: 600; border:
-    // 1px solid var(--border); background: var(--surface); color:
+    // 1px solid var(--border); background: var(--surface-alt); color:
     // var(--text-muted) — and only .active swaps to solid accent fill.
     return ChoiceChip(
       label: Text(label),
@@ -171,7 +175,7 @@ class AppChip extends StatelessWidget {
         fontWeight: FontWeight.w600,
         fontSize: 13,
       ),
-      backgroundColor: card,
+      backgroundColor: unselectedBg,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
       side: BorderSide(color: selected ? AppColors.primary : border),
     );

@@ -26,11 +26,11 @@ class InvoiceDetailScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: Text(invoice.id, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800))),
+                    Expanded(child: Text(invoice.id, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800))),
                     invoice.status == InvoiceStatus.paid ? StatusBadge.paid(context) : StatusBadge.notPaid(context),
                   ],
                 ),
-                Text(invoice.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+                Text(invoice.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
                 const SizedBox(height: 14),
                 SectionCard(
                   child: Column(
@@ -43,7 +43,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                 ),
                 if (invoice.lines.isNotEmpty) ...[
                   const SizedBox(height: 18),
-                  const Text('Lines', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                  const Text('Lines', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 10),
                   SectionCard(
                     child: Column(
@@ -64,10 +64,10 @@ class InvoiceDetailScreen extends StatelessWidget {
                         KeyValueRow('Tax', '${fmtMoney(invoice.tax)} JOD'),
                         const Divider(height: 24),
                         KeyValueRow('Total', '${fmtMoney(invoice.total)} JOD',
-                            valueStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14)),
+                            valueStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
                         const Divider(height: 20),
                         KeyValueRow('Amount due', '${fmtMoney(invoice.due)} JOD',
-                            valueStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: AppColors.danger)),
+                            valueStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: AppColors.danger)),
                       ],
                     ),
                   ),

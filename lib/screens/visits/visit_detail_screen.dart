@@ -28,7 +28,7 @@ class VisitDetailScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Text(visit.customerName, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+                      child: Text(visit.customerName, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                     ),
                     visit.status == VisitStatus.done ? StatusBadge.done(context) : StatusBadge.planned(context),
                   ],

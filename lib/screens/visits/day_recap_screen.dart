@@ -18,7 +18,7 @@ class DayRecapScreen extends StatelessWidget {
           children: [
             Text(context.t('day_recap_subtitle'), style: TextStyle(color: Colors.grey.shade600)),
             const SizedBox(height: 18),
-            Text(context.t('sales'), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+            Text(context.t('sales'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 10),
             SectionCard(
               child: Column(
@@ -32,7 +32,7 @@ class DayRecapScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 22),
-            Text(context.t('nav_visits'), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+            Text(context.t('nav_visits'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 10),
             SectionCard(
               child: Column(

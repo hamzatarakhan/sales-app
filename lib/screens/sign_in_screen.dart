@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_scope.dart';
 import '../l10n.dart';
 import '../root_shell.dart';
+import '../theme.dart';
 import '../widgets/brand_icon.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 140),
                   const BrandIcon(size: 88),
                   const SizedBox(height: 20),
-                  Text(context.t('app_name'), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+                  Text(context.t('app_name'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 6),
                   Text(context.t('sign_in_subtitle'), style: TextStyle(color: Colors.grey.shade600)),
                   const SizedBox(height: 32),
@@ -57,7 +58,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     onChanged: (_) => setState(() {}),
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
-                        icon: Icon(_obscure ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                        icon: Icon(
+                          _obscure ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                          size: 18,
+                          color: AppColors.textFaint,
+                        ),
                         onPressed: () => setState(() => _obscure = !_obscure),
                       ),
                     ),

@@ -48,7 +48,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                 children: [
-                  Text('Order for ${widget.visit.customerName}', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+                  Text('Order for ${widget.visit.customerName}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                   const SizedBox(height: 12),
                   SectionCard(
                     child: Text('Balance ${widget.visit.balance.toStringAsFixed(0)} / limit ${widget.visit.creditLimit.toStringAsFixed(0)}'),
@@ -119,7 +119,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(context.t('customer_signature'), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+              Text(context.t('customer_signature'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
               const SizedBox(height: 8),
               Text("Have the customer sign to confirm this order before it's finalized.",
                   style: TextStyle(color: Colors.grey.shade600)),
@@ -176,7 +176,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
               child: const Icon(Icons.check, color: AppColors.success, size: 32),
             ),
             const SizedBox(height: 16),
-            Text(context.t('order_confirmed'), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+            Text(context.t('order_confirmed'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
             Text('Van stock was deducted and the invoice was created.',
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600)),
@@ -227,7 +227,7 @@ class _ProductRow extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                    Text(product.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
                     const SizedBox(height: 4),
                     Text.rich(TextSpan(children: [
                       TextSpan(text: '${fmtMoney(product.price)} JOD · ', style: TextStyle(color: Colors.grey.shade600)),
@@ -279,7 +279,7 @@ class _Stepper extends StatelessWidget {
     return Row(
       children: [
         _StepBtn(icon: Icons.remove, onTap: qty > 0 ? () => onChanged(qty - 1) : null),
-        SizedBox(width: 32, child: Text('$qty', textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700))),
+        SizedBox(width: 32, child: Text('$qty', textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700))),
         _StepBtn(icon: Icons.add, onTap: qty < max ? () => onChanged(qty + 1) : null),
       ],
     );

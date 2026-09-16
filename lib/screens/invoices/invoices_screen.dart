@@ -55,7 +55,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
             TextField(
               controller: _search,
               onChanged: (_) => setState(() {}),
-              decoration: InputDecoration(hintText: context.t('number_or_customer'), prefixIcon: const Icon(Icons.search)),
+              decoration: InputDecoration(hintText: context.t('number_or_customer'), prefixIcon: const Icon(Icons.search, size: 18)),
             ),
             const SizedBox(height: 12),
             Wrap(
@@ -73,7 +73,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('${invoices.length} invoices · outstanding', style: TextStyle(color: Colors.grey.shade600)),
-                  Text('${fmtMoney(outstanding)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
+                  Text('${fmtMoney(outstanding)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12)),
                 ],
               ),
             ),
@@ -89,7 +89,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(inv.id, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                            Text(inv.id, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
                             Text(inv.customerName, style: TextStyle(color: Colors.grey.shade600)),
                           ],
@@ -98,14 +98,14 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('${fmtMoney(inv.total)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
+                          Text('${fmtMoney(inv.total)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12)),
                           Text(
                             'due ${fmtDate(inv.dueDate)}',
                             style: TextStyle(
                               color: inv.status == InvoiceStatus.notPaid && inv.dueDate.isBefore(now)
                                   ? AppColors.danger
                                   : Colors.grey.shade600,
-                              fontSize: 12,
+                              fontSize: 11,
                             ),
                           ),
                           const SizedBox(height: 6),

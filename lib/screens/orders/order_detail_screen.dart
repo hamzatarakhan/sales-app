@@ -22,11 +22,11 @@ class OrderDetailScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(child: Text(order.id, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800))),
+                Expanded(child: Text(order.id, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800))),
                 order.status == OrderStatus.invoiced ? StatusBadge.invoiced(context) : StatusBadge.draft(context),
               ],
             ),
-            Text(order.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+            Text(order.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
             const SizedBox(height: 14),
             SectionCard(
               child: Column(
@@ -52,7 +52,7 @@ class OrderDetailScreen extends StatelessWidget {
             ),
             if (order.lines.isNotEmpty) ...[
               const SizedBox(height: 18),
-              const Text('Lines', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+              const Text('Lines', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
               const SizedBox(height: 10),
               SectionCard(
                 child: Column(

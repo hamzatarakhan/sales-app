@@ -42,7 +42,7 @@ class _VanStockScreenState extends State<VanStockScreen> {
                 TextField(
                   controller: _search,
                   onChanged: (_) => setState(() {}),
-                  decoration: InputDecoration(hintText: context.t('name_or_reference'), prefixIcon: const Icon(Icons.search)),
+                  decoration: InputDecoration(hintText: context.t('name_or_reference'), prefixIcon: const Icon(Icons.search, size: 18)),
                 ),
                 const SizedBox(height: 12),
                 Wrap(
@@ -65,8 +65,8 @@ class _VanStockScreenState extends State<VanStockScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(p.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
-                                Text(p.sku, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                                Text(p.name, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+                                Text(p.sku, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
                               ],
                             ),
                           ),
@@ -76,9 +76,9 @@ class _VanStockScreenState extends State<VanStockScreen> {
                               Text('${p.vanStock}',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w800,
-                                      fontSize: 13,
+                                      fontSize: 12,
                                       color: p.isOut ? AppColors.danger : Colors.black87)),
-                              Text(context.t('case_unit'), style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                              Text(context.t('case_unit'), style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
                             ],
                           ),
                           Icon(Icons.chevron_right, color: Colors.grey.shade400),
