@@ -51,21 +51,17 @@ class _RoundButton extends StatelessWidget {
           customBorder: const CircleBorder(),
           child: Center(
             child: Container(
-              width: 34,
-              height: 34,
+              width: 28,
+              height: 28,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.cardAltDark : Colors.white,
+                color: isDark ? Colors.white10 : Colors.white,
                 shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: isDark ? Colors.black.withOpacity(0.4) : Colors.black.withOpacity(0.08),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+                // design-system.html #navigation: headers are flat with a
+                // border, never a floating/shadowed element.
+                border: Border.all(color: isDark ? AppColors.dividerDark : AppColors.divider),
               ),
-              child: Icon(icon, size: 18),
+              child: Icon(icon, size: 16),
             ),
           ),
         ),
@@ -173,12 +169,13 @@ class AppChip extends StatelessWidget {
       onSelected: (_) => onTap(),
       showCheckmark: false,
       labelPadding: EdgeInsets.zero,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      // design-system.html .m-chip: padding 8px 16px, weight 600.
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       selectedColor: AppColors.primary,
       labelStyle: TextStyle(
         color: selected ? AppColors.onPrimary : (isDark ? Colors.white70 : AppColors.textMuted),
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w600,
         fontSize: 13,
       ),
       backgroundColor: unselectedBg,

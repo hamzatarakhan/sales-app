@@ -76,27 +76,31 @@ ThemeData buildTheme(Brightness brightness) {
       toolbarHeight: 58,
       titleTextStyle: TextStyle(
         fontSize: 17,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w600,
         color: isDark ? Colors.white : Colors.black,
       ),
+      // design-system.html #navigation: "card-colored background, no
+      // shadow, a border instead — flat, not floating."
+      shape: Border(bottom: BorderSide(color: border)),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: card,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      // design-system.html .m-search: border-radius 12px, padding 10px 14px.
+      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       hintStyle: const TextStyle(color: AppColors.textFaint, fontSize: 13, fontWeight: FontWeight.w400),
       prefixIconColor: AppColors.textFaint,
       suffixIconColor: AppColors.textFaint,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(color: border),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(color: border),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(12),
         borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
       ),
     ),
