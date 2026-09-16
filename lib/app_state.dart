@@ -56,6 +56,7 @@ class AppState extends ChangeNotifier {
         creditLimit: 300,
         status: VisitStatus.done,
         checkedIn: true,
+        checkInDistanceM: 8,
         hadPurchase: true,
       ),
     ];
