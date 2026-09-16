@@ -64,7 +64,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           children: [
                             Text(o.id, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
-                            Text('${o.customerName} · ${fmtDate(o.date)}', style: TextStyle(color: Colors.grey.shade600)),
+                            Text('${o.customerName} · ${fmtDate(o.date)}', style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
                           ],
                         ),
                       ),

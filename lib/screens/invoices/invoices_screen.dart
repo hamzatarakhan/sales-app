@@ -72,7 +72,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('${invoices.length} invoices · outstanding', style: TextStyle(color: Colors.grey.shade600)),
+                  Text('${invoices.length} invoices · outstanding', style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
                   Text('${fmtMoney(outstanding)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12)),
                 ],
               ),
@@ -91,7 +91,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                           children: [
                             Text(inv.id, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
-                            Text(inv.customerName, style: TextStyle(color: Colors.grey.shade600)),
+                            Text(inv.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
                           ],
                         ),
                       ),

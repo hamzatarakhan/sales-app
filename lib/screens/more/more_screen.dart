@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
 import '../../app_state.dart';
@@ -105,7 +106,7 @@ class MoreScreen extends StatelessWidget {
                       const _IconBox(icon: Icons.notifications_none, bg: AppColors.warningTint, color: AppColors.warning),
                       const SizedBox(width: 12),
                       Expanded(child: Text(context.t('visit_reminders'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12))),
-                      Switch(value: state.visitReminders, onChanged: state.setVisitReminders, activeColor: AppColors.success),
+                      CupertinoSwitch(value: state.visitReminders, onChanged: state.setVisitReminders, activeTrackColor: AppColors.primary),
                     ],
                   ),
                 ),
