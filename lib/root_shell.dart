@@ -101,18 +101,35 @@ class _TabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fg = selected ? color : AppColors.textFaint;
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: fg, size: 21),
-          const SizedBox(height: 3),
-          Text(
-            label,
-            style: TextStyle(color: fg, fontSize: 10, fontWeight: selected ? FontWeight.w600 : FontWeight.w500),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          mouseCursor: SystemMouseCursors.click,
+          borderRadius: BorderRadius.circular(14),
+          hoverColor: color.withOpacity(0.08),
+          splashColor: color.withOpacity(0.12),
+          highlightColor: color.withOpacity(0.1),
+          // InkWell's hover/splash overlays already animate their
+          // opacity in smoothly (Material's default ~200ms fade) --
+          // no custom AnimatedContainer needed for this.
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: fg, size: 21),
+                const SizedBox(height: 3),
+                Text(
+                  label,
+                  style: TextStyle(color: fg, fontSize: 10, fontWeight: selected ? FontWeight.w600 : FontWeight.w500),
+                ),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -153,22 +153,23 @@ class AppChip extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final border = isDark ? AppColors.dividerDark : AppColors.divider;
     final card = isDark ? AppColors.cardDark : AppColors.card;
-    // design-system.html .m-chip: 8px/16px padding, full pill, weight
-    // 600, and — unlike Badge — always carries a 1px border: the app's
-    // one border token when inactive, the accent color when active.
+    // design-system.html .m-chip, applied literally: padding: 8px 16px;
+    // border-radius: 999px; font-size: 13px; font-weight: 600; border:
+    // 1px solid var(--border); background: var(--surface); color:
+    // var(--text-muted) — and only .active swaps to solid accent fill.
     return ChoiceChip(
       label: Text(label),
       selected: selected,
       onSelected: (_) => onTap(),
       showCheckmark: false,
-      visualDensity: VisualDensity.compact,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 6),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      labelPadding: EdgeInsets.zero,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       selectedColor: AppColors.primary,
       labelStyle: TextStyle(
         color: selected ? AppColors.onPrimary : (isDark ? Colors.white70 : AppColors.textMuted),
         fontWeight: FontWeight.w600,
-        fontSize: 12,
+        fontSize: 13,
       ),
       backgroundColor: card,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
