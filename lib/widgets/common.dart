@@ -57,7 +57,7 @@ class _RoundButton extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isDark ? Colors.white10 : Colors.white,
                 shape: BoxShape.circle,
-                border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
+                border: Border.all(color: isDark ? AppColors.dividerDark : AppColors.divider),
               ),
               child: Icon(icon, size: 16),
             ),
@@ -89,10 +89,12 @@ class StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // design-system.html .m-badge: 3px/8-10px padding, radii.sm (8px),
+    // weight 600 -- not the 20px pill this used to be.
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(20)),
-      child: Text(text, style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 11)),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(8)),
+      child: Text(text, style: TextStyle(color: fg, fontWeight: FontWeight.w600, fontSize: 12)),
     );
   }
 }
@@ -149,23 +151,28 @@ class AppChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final border = isDark ? AppColors.dividerDark : AppColors.divider;
+    final card = isDark ? AppColors.cardDark : AppColors.card;
+    // design-system.html .m-chip: 8px/16px padding, full pill, weight
+    // 600, and — unlike Badge — always carries a 1px border: the app's
+    // one border token when inactive, the accent color when active.
     return ChoiceChip(
       label: Text(label),
       selected: selected,
       onSelected: (_) => onTap(),
       showCheckmark: false,
       visualDensity: VisualDensity.compact,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 4),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       selectedColor: AppColors.primary,
       labelStyle: TextStyle(
-        color: selected ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
-        fontWeight: FontWeight.w700,
+        color: selected ? AppColors.onPrimary : (isDark ? Colors.white70 : AppColors.textMuted),
+        fontWeight: FontWeight.w600,
         fontSize: 12,
       ),
-      backgroundColor: isDark ? Colors.white10 : Colors.grey.shade100,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      side: BorderSide.none,
+      backgroundColor: card,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+      side: BorderSide(color: selected ? AppColors.primary : border),
     );
   }
 }

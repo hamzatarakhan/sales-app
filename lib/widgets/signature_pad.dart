@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme.dart';
 
 /// Minimal freehand signature capture — no package, just a
 /// GestureDetector + CustomPainter over the collected strokes.
@@ -27,7 +28,7 @@ class SignaturePadState extends State<SignaturePad> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.black12),
+        border: Border.all(color: AppColors.divider),
         borderRadius: BorderRadius.circular(14),
       ),
       child: GestureDetector(
