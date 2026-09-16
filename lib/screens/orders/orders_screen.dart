@@ -34,7 +34,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       body: SafeArea(
         top: false,
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 100),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
           children: [
             TextField(
               controller: _search,

@@ -21,7 +21,7 @@ class MoreScreen extends StatelessWidget {
           body: SafeArea(
             top: false,
             child: ListView(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
               children: [
                 SectionCard(
                   child: Column(
