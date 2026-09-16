@@ -38,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 36),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(context.t('username_or_email'), style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppColors.text)),
+                    child: Text(context.t('username_or_email'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: AppColors.text)),
                   ),
                   const SizedBox(height: 8),
                   TextField(
@@ -55,7 +55,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 20),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(context.t('password'), style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppColors.text)),
+                    child: Text(context.t('password'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: AppColors.text)),
                   ),
                   const SizedBox(height: 8),
                   TextField(
