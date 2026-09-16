@@ -30,6 +30,9 @@ class DetailAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
+/// The visible chip is deliberately compact (28px), but the tappable
+/// area is padded out to 40px — Material/iOS both call for a ~40-44px
+/// minimum touch target, even when the visual element is smaller.
 class _RoundButton extends StatelessWidget {
   const _RoundButton({required this.icon, required this.onTap});
   final IconData icon;
@@ -38,21 +41,27 @@ class _RoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return Padding(
-      padding: const EdgeInsets.only(left: 4),
-      child: InkWell(
-        onTap: onTap,
-        customBorder: const CircleBorder(),
-        child: Container(
-          width: 22,
-          height: 22,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: isDark ? Colors.white10 : Colors.white,
-            shape: BoxShape.circle,
-            border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
+    return SizedBox(
+      width: 40,
+      height: 40,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          customBorder: const CircleBorder(),
+          child: Center(
+            child: Container(
+              width: 28,
+              height: 28,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: isDark ? Colors.white10 : Colors.white,
+                shape: BoxShape.circle,
+                border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : AppColors.divider),
+              ),
+              child: Icon(icon, size: 16),
+            ),
           ),
-          child: Icon(icon, size: 12),
         ),
       ),
     );
