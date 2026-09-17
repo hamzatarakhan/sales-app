@@ -39,19 +39,19 @@ class _RootShellState extends State<RootShell> {
       ),
       (
         outline: Icons.inventory_2_outlined, filled: Icons.inventory_2, label: context.t('nav_stock'),
-        color: AppColors.special,
+        color: isDark ? AppColors.specialDark : AppColors.special,
       ),
       (
         outline: Icons.shopping_cart_outlined, filled: Icons.shopping_cart, label: context.t('nav_orders'),
-        color: AppColors.warning,
+        color: isDark ? AppColors.warningDark : AppColors.warning,
       ),
       (
         outline: Icons.description_outlined, filled: Icons.description, label: context.t('nav_invoices'),
-        color: AppColors.success,
+        color: isDark ? AppColors.successDark : AppColors.success,
       ),
       (
         outline: Icons.more_horiz, filled: Icons.more_horiz, label: context.t('nav_more'),
-        color: AppColors.info,
+        color: isDark ? AppColors.infoDark : AppColors.info,
       ),
     ];
 

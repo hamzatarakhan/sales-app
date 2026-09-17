@@ -67,7 +67,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                             valueStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
                         const Divider(height: 20),
                         KeyValueRow('Amount due', '${fmtMoney(invoice.due)} JOD',
-                            valueStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: AppColors.danger)),
+                            valueStyle: TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: AppTones.danger(context))),
                       ],
                     ),
                   ),

@@ -90,8 +90,8 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
             Container(
               width: 64,
               height: 64,
-              decoration: const BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
-              child: const Icon(Icons.check, color: AppColors.success, size: 32),
+              decoration: BoxDecoration(color: AppTones.successTint(ctx), shape: BoxShape.circle),
+              child: Icon(Icons.check, color: AppTones.success(ctx), size: 32),
             ),
             const SizedBox(height: 16),
             Text(context.t('payment_recorded'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),

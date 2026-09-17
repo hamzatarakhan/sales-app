@@ -35,15 +35,15 @@ class OrderDetailScreen extends StatelessWidget {
                   KeyValueRow('Date', fmtDate(order.date)),
                   if (order.hasSignature) ...[
                     const Divider(height: 20),
-                    const KeyValueRow(
+                    KeyValueRow(
                       'Customer signature',
                       'Captured',
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('Captured', style: TextStyle(color: AppColors.success, fontWeight: FontWeight.w700)),
-                          SizedBox(width: 4),
-                          Icon(Icons.check, color: AppColors.success, size: 18),
+                          Text('Captured', style: TextStyle(color: AppTones.success(context), fontWeight: FontWeight.w700)),
+                          const SizedBox(width: 4),
+                          Icon(Icons.check, color: AppTones.success(context), size: 18),
                         ],
                       ),
                     ),

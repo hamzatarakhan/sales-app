@@ -50,7 +50,7 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const _IconBox(icon: Icons.contrast, bg: AppColors.specialTint, color: AppColors.special),
+                          _IconBox(icon: Icons.contrast, bg: AppTones.specialTint(context), color: AppTones.special(context)),
                           const SizedBox(width: 12),
                           Text(context.t('appearance'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
                         ],
@@ -76,7 +76,7 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const _IconBox(icon: Icons.translate, bg: AppColors.specialTint, color: AppColors.special),
+                          _IconBox(icon: Icons.translate, bg: AppTones.specialTint(context), color: AppTones.special(context)),
                           const SizedBox(width: 12),
                           Text(context.t('language'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
                         ],
@@ -93,8 +93,8 @@ class MoreScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.layers_outlined,
-                  iconBg: AppColors.warningTint,
-                  iconColor: AppColors.warning,
+                  iconBg: AppTones.warningTint(context),
+                  iconColor: AppTones.warning(context),
                   title: context.t('app_phase'),
                   subtitle: 'Phase 2 requirements',
                   onTap: () => _info(context, context.t('app_phase'), 'Phase 2 requirements are complete.'),
@@ -103,7 +103,7 @@ class MoreScreen extends StatelessWidget {
                 SectionCard(
                   child: Row(
                     children: [
-                      const _IconBox(icon: Icons.notifications_none, bg: AppColors.warningTint, color: AppColors.warning),
+                      _IconBox(icon: Icons.notifications_none, bg: AppTones.warningTint(context), color: AppTones.warning(context)),
                       const SizedBox(width: 12),
                       Expanded(child: Text(context.t('visit_reminders'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12))),
                       CupertinoSwitch(value: state.visitReminders, onChanged: state.setVisitReminders, activeTrackColor: AppColors.primary),
@@ -113,32 +113,32 @@ class MoreScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.storage_outlined,
-                  iconBg: AppColors.infoTint,
-                  iconColor: AppColors.info,
+                  iconBg: AppTones.infoTint(context),
+                  iconColor: AppTones.info(context),
                   title: context.t('server_connection'),
                   onTap: () => _info(context, context.t('server_connection'), 'https://acme-dist.odoo.com\nConnected'),
                 ),
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.info_outline,
-                  iconBg: AppColors.successTint,
-                  iconColor: AppColors.success,
+                  iconBg: AppTones.successTint(context),
+                  iconColor: AppTones.success(context),
                   title: context.t('about'),
                   onTap: () => _info(context, context.t('about'), '${context.t('app_name')}\nVersion 1.0.0'),
                 ),
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.science_outlined,
-                  iconBg: AppColors.specialTint,
-                  iconColor: AppColors.special,
+                  iconBg: AppTones.specialTint(context),
+                  iconColor: AppTones.special(context),
                   title: 'Kitchen sink (dev)',
                   onTap: () => _info(context, 'Kitchen sink (dev)', 'Component playground — dev only.'),
                 ),
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.play_arrow_outlined,
-                  iconBg: AppColors.warningTint,
-                  iconColor: AppColors.warning,
+                  iconBg: AppTones.warningTint(context),
+                  iconColor: AppTones.warning(context),
                   title: 'Replay onboarding (dev)',
                   showChevron: false,
                   onTap: () => ScaffoldMessenger.of(context).showSnackBar(
@@ -148,10 +148,10 @@ class MoreScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.logout,
-                  iconBg: AppColors.dangerTint,
-                  iconColor: AppColors.danger,
+                  iconBg: AppTones.dangerTint(context),
+                  iconColor: AppTones.danger(context),
                   title: context.t('sign_out'),
-                  titleColor: AppColors.danger,
+                  titleColor: AppTones.danger(context),
                   showChevron: false,
                   onTap: () => _confirmSignOut(context, state),
                 ),
@@ -190,7 +190,7 @@ class MoreScreen extends StatelessWidget {
             const Text("You'll need to sign in again to use the app.", style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
             const SizedBox(height: 20),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: AppColors.danger),
+              style: ElevatedButton.styleFrom(backgroundColor: AppTones.danger(context)),
               onPressed: () {
                 state.signOut();
                 Navigator.pop(ctx);

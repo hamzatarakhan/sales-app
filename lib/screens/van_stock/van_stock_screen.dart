@@ -92,7 +92,7 @@ class _VanStockScreenState extends State<VanStockScreen> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.w800,
                                       fontSize: 12,
-                                      color: p.isOut ? AppColors.danger : AppColors.text)),
+                                      color: p.isOut ? AppTones.danger(context) : (Theme.of(context).brightness == Brightness.dark ? Colors.white : AppColors.text))),
                               Text(context.t('case_unit'), style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
                             ],
                           ),

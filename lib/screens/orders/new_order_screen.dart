@@ -172,8 +172,8 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             Container(
               width: 64,
               height: 64,
-              decoration: const BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
-              child: const Icon(Icons.check, color: AppColors.success, size: 32),
+              decoration: BoxDecoration(color: AppTones.successTint(ctx), shape: BoxShape.circle),
+              child: Icon(Icons.check, color: AppTones.success(ctx), size: 32),
             ),
             const SizedBox(height: 16),
             Text(context.t('order_confirmed'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
@@ -236,7 +236,7 @@ class _ProductRow extends StatelessWidget {
                             ? 'Out of stock'
                             : '${product.vanStock} Case in van${product.isLow ? ' (low)' : ''}',
                         style: TextStyle(
-                          color: (product.isLow || product.isOut) ? AppColors.danger : AppColors.textMuted,
+                          color: (product.isLow || product.isOut) ? AppTones.danger(context) : AppColors.textMuted,
                           fontWeight: (product.isLow || product.isOut) ? FontWeight.w600 : FontWeight.normal,
                         ),
                       ),
@@ -326,15 +326,16 @@ class _StepBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
       child: Container(
         width: 34,
         height: 34,
-        decoration: BoxDecoration(color: AppColors.cardAlt, borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: isDark ? AppColors.cardAltDark : AppColors.cardAlt, borderRadius: BorderRadius.circular(8)),
         alignment: Alignment.center,
-        child: Icon(icon, size: 18, color: onTap == null ? AppColors.textFaint : AppColors.text),
+        child: Icon(icon, size: 18, color: onTap == null ? AppColors.textFaint : (isDark ? Colors.white : AppColors.text)),
       ),
     );
   }

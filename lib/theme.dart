@@ -39,11 +39,43 @@ class AppColors {
   static const special = Color(0xFF8B5CF6);
   static const specialTint = Color(0x1F8B5CF6);
 
+  // Dark-mode tone vocabulary — design-system.html specs these as
+  // independently-tuned, brighter values (not a filter over the light
+  // ones) so they stay vivid against a near-black background. Resolve
+  // with AppTones instead of using these directly.
+  static const successDark = Color(0xFF3DD68C);
+  static const successTintDark = Color(0x263DD68C);
+  static const warningDark = Color(0xFFF2C04D);
+  static const warningTintDark = Color(0x26F2C04D);
+  static const dangerDark = Color(0xFFFF6B7D);
+  static const dangerTintDark = Color(0x26FF6B7D);
+  static const infoDark = Color(0xFF5AA2F5);
+  static const infoTintDark = Color(0x265AA2F5);
+  static const specialDark = Color(0xFFA78BFA);
+  static const specialTintDark = Color(0x29A78BFA);
+
   static const overlay = Color(0x73000000);
 
   // Kept for source clarity where a status badge's tone is picked by name
   // (see StatusBadge factories in widgets/common.dart) rather than tone.
   static const primarySoft = Color(0xFFA9C7E0);
+}
+
+/// Resolves a tone name to the correct light/dark AppColors constant for
+/// the given context, so callsites never hardcode the light-only value.
+class AppTones {
+  static bool _isDark(BuildContext context) => Theme.of(context).brightness == Brightness.dark;
+
+  static Color success(BuildContext context) => _isDark(context) ? AppColors.successDark : AppColors.success;
+  static Color successTint(BuildContext context) => _isDark(context) ? AppColors.successTintDark : AppColors.successTint;
+  static Color warning(BuildContext context) => _isDark(context) ? AppColors.warningDark : AppColors.warning;
+  static Color warningTint(BuildContext context) => _isDark(context) ? AppColors.warningTintDark : AppColors.warningTint;
+  static Color danger(BuildContext context) => _isDark(context) ? AppColors.dangerDark : AppColors.danger;
+  static Color dangerTint(BuildContext context) => _isDark(context) ? AppColors.dangerTintDark : AppColors.dangerTint;
+  static Color info(BuildContext context) => _isDark(context) ? AppColors.infoDark : AppColors.info;
+  static Color infoTint(BuildContext context) => _isDark(context) ? AppColors.infoTintDark : AppColors.infoTint;
+  static Color special(BuildContext context) => _isDark(context) ? AppColors.specialDark : AppColors.special;
+  static Color specialTint(BuildContext context) => _isDark(context) ? AppColors.specialTintDark : AppColors.specialTint;
 }
 
 ThemeData buildTheme(Brightness brightness) {

@@ -17,6 +17,7 @@ class VisitDetailScreen extends StatelessWidget {
     return AnimatedBuilder(
       animation: state,
       builder: (context, _) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
         return Scaffold(
           appBar: const DetailAppBar(title: 'Visit'),
           body: SafeArea(
@@ -100,7 +101,7 @@ class VisitDetailScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     context.t('check_in_unlock'),
-                    style: const TextStyle(color: AppColors.warning, fontWeight: FontWeight.w600),
+                    style: TextStyle(color: isDark ? AppColors.warningDark : AppColors.warning, fontWeight: FontWeight.w600),
                   ),
                 ],
                 if (visit.checkedIn && visit.hasMerchPhoto) ...[
@@ -114,7 +115,7 @@ class VisitDetailScreen extends StatelessWidget {
                         Container(
                           height: 140,
                           decoration: BoxDecoration(
-                            color: AppColors.divider,
+                            color: isDark ? AppColors.cardAltDark : AppColors.divider,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           alignment: Alignment.center,

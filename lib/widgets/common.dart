@@ -77,17 +77,19 @@ class StatusBadge extends StatelessWidget {
   final Color fg;
 
   factory StatusBadge.planned(BuildContext context) =>
-      StatusBadge(text: context.t('status_planned'), bg: AppColors.infoTint, fg: AppColors.info);
+      StatusBadge(text: context.t('status_planned'), bg: AppTones.infoTint(context), fg: AppTones.info(context));
   factory StatusBadge.done(BuildContext context) =>
-      StatusBadge(text: context.t('status_done'), bg: AppColors.successTint, fg: AppColors.success);
+      StatusBadge(text: context.t('status_done'), bg: AppTones.successTint(context), fg: AppTones.success(context));
   factory StatusBadge.invoiced(BuildContext context) =>
-      StatusBadge(text: context.t('status_invoiced'), bg: AppColors.successTint, fg: AppColors.success);
-  factory StatusBadge.draft(BuildContext context) =>
-      StatusBadge(text: context.t('status_draft'), bg: AppColors.cardAlt, fg: AppColors.textMuted);
+      StatusBadge(text: context.t('status_invoiced'), bg: AppTones.successTint(context), fg: AppTones.success(context));
+  factory StatusBadge.draft(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return StatusBadge(text: context.t('status_draft'), bg: isDark ? AppColors.cardAltDark : AppColors.cardAlt, fg: AppColors.textMuted);
+  }
   factory StatusBadge.notPaid(BuildContext context) =>
-      StatusBadge(text: context.t('status_not_paid'), bg: AppColors.warningTint, fg: AppColors.warning);
+      StatusBadge(text: context.t('status_not_paid'), bg: AppTones.warningTint(context), fg: AppTones.warning(context));
   factory StatusBadge.paid(BuildContext context) =>
-      StatusBadge(text: context.t('status_paid'), bg: AppColors.successTint, fg: AppColors.success);
+      StatusBadge(text: context.t('status_paid'), bg: AppTones.successTint(context), fg: AppTones.success(context));
 
   @override
   Widget build(BuildContext context) {

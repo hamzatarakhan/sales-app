@@ -34,7 +34,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
                 child: Row(
                   children: [
                     Expanded(child: _Stat(value: '${visits.length}', label: context.t('stops'))),
-                    Expanded(child: _Stat(value: '$done/${visits.length}', label: context.t('status_done'), color: AppColors.success)),
+                    Expanded(child: _Stat(value: '$done/${visits.length}', label: context.t('status_done'), color: AppTones.success(context))),
                     Expanded(child: _Stat(value: '6.8', label: context.t('km_route'))),
                   ],
                 ),
@@ -186,7 +186,7 @@ class _PinButton extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: done ? AppColors.success : AppColors.primary,
+                  color: done ? AppTones.success(context) : AppColors.primary,
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 2),
                 ),
@@ -261,38 +261,21 @@ class _MapPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // A real map tile is never a flat block color -- layer a base fill,
-    // a few soft "land parcel" blocks, then roads, so it reads as a map
-    // even without real tile data. Dark and light get independently
-    // tuned palettes (light isn't just an inverted dark).
-    final bgColor = isDark ? const Color(0xFF23262B) : const Color(0xFFE9EDF0);
-    final blockColor = isDark ? const Color(0xFF2A2E34) : const Color(0xFFDFE5E9);
-    final roadColor = isDark ? Colors.white24 : const Color(0xFFC7CFD4);
+    // A minimal dot-grid cartographic style -- unambiguous as "a map"
+    // regardless of screen size, and immune to the clutter/edge-overflow
+    // risk of randomly placed "buildings". Dark and light get
+    // independently tuned palettes (light isn't just an inverted dark).
+    final bgColor = isDark ? const Color(0xFF1B1F24) : const Color(0xFFEEF1F4);
+    final dotColor = isDark ? Colors.white.withValues(alpha: 0.10) : const Color(0xFFC7CFD6);
 
     canvas.drawRect(Offset.zero & size, Paint()..color = bgColor);
 
-    final blockPaint = Paint()..color = blockColor;
-    final rand = _StableRandom(size.width.toInt());
-    for (int i = 0; i < 10; i++) {
-      final w = 40.0 + rand.next() * 70;
-      final h = 30.0 + rand.next() * 50;
-      final x = rand.next() * size.width;
-      final y = rand.next() * size.height;
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(x, y, w, h), const Radius.circular(4)),
-        blockPaint,
-      );
-    }
-
-    final roadPaint = Paint()
-      ..color = roadColor
-      ..strokeWidth = 3
-      ..style = PaintingStyle.stroke;
-    for (double x = 0; x < size.width; x += 60) {
-      canvas.drawLine(Offset(x, 0), Offset(x - 80, size.height), roadPaint);
-    }
-    for (double y = 40; y < size.height; y += 70) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y - 30), roadPaint);
+    final dotPaint = Paint()..color = dotColor;
+    const spacing = 22.0;
+    for (double y = spacing / 2; y < size.height; y += spacing) {
+      for (double x = spacing / 2; x < size.width; x += spacing) {
+        canvas.drawCircle(Offset(x, y), 1.4, dotPaint);
+      }
     }
 
     final routePaint = Paint()
@@ -334,16 +317,4 @@ class _MapPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _MapPainter oldDelegate) =>
       oldDelegate.located != located || oldDelegate.isDark != isDark;
-}
-
-/// Deterministic pseudo-random sequence (fixed seed) so the map's decorative
-/// "land parcel" blocks stay put across repaints instead of jittering.
-class _StableRandom {
-  _StableRandom(int seed) : _state = seed == 0 ? 1 : seed;
-  int _state;
-
-  double next() {
-    _state = (_state * 1103515245 + 12345) & 0x7fffffff;
-    return _state / 0x7fffffff;
-  }
 }

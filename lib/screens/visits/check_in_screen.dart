@@ -32,6 +32,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
   @override
   Widget build(BuildContext context) {
     final state = AppStateScope.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: const DetailAppBar(title: 'Check in'),
       body: SafeArea(
@@ -39,9 +40,9 @@ class _CheckInScreenState extends State<CheckInScreen> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
           children: [
-            const Text(
+            Text(
               "Confirms you're at the customer's location using your phone's GPS.",
-              style: TextStyle(color: AppColors.text),
+              style: TextStyle(color: isDark ? Colors.white : AppColors.text),
             ),
             const SizedBox(height: 16),
             SectionCard(
@@ -52,7 +53,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                   ] else ...[
                     Text(
                       '${_distanceM}m away',
-                      style: const TextStyle(color: AppColors.danger, fontWeight: FontWeight.w800, fontSize: 17),
+                      style: TextStyle(color: isDark ? AppColors.dangerDark : AppColors.danger, fontWeight: FontWeight.w800, fontSize: 17),
                     ),
                   ],
                   const SizedBox(height: 12),
@@ -71,13 +72,13 @@ class _CheckInScreenState extends State<CheckInScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(context.t('merch_photo_optional'), style: const TextStyle(color: AppColors.text, fontWeight: FontWeight.w600)),
+                  Text(context.t('merch_photo_optional'), style: TextStyle(color: isDark ? Colors.white : AppColors.text, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 12),
                   if (_photo)
                     Container(
                       height: 140,
                       width: double.infinity,
-                      decoration: BoxDecoration(color: AppColors.divider, borderRadius: BorderRadius.circular(12)),
+                      decoration: BoxDecoration(color: isDark ? AppColors.cardAltDark : AppColors.divider, borderRadius: BorderRadius.circular(12)),
                       alignment: Alignment.center,
                       child: const Icon(Icons.check_circle, color: AppColors.textMuted, size: 32),
                     )
@@ -121,8 +122,8 @@ class _CheckInScreenState extends State<CheckInScreen> {
             Container(
               width: 64,
               height: 64,
-              decoration: const BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
-              child: const Icon(Icons.check, color: AppColors.success, size: 32),
+              decoration: BoxDecoration(color: AppTones.successTint(ctx), shape: BoxShape.circle),
+              child: Icon(Icons.check, color: AppTones.success(ctx), size: 32),
             ),
             const SizedBox(height: 16),
             Text(context.t('check_in_saved'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),

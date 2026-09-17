@@ -105,7 +105,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                       value: '$remaining',
                       label: context.t('filter_remaining'),
                       selected: _filter == _Filter.remaining,
-                      color: AppColors.warning,
+                      color: Theme.of(context).brightness == Brightness.dark ? AppColors.warningDark : AppColors.warning,
                       onTap: () => setState(() => _filter = _Filter.remaining),
                     ),
                   ),
@@ -115,7 +115,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                       value: '$done',
                       label: context.t('filter_done'),
                       selected: _filter == _Filter.done,
-                      color: AppColors.success,
+                      color: Theme.of(context).brightness == Brightness.dark ? AppColors.successDark : AppColors.success,
                       onTap: () => setState(() => _filter = _Filter.done),
                     ),
                   ),
@@ -130,8 +130,8 @@ class _VisitsScreenState extends State<VisitsScreen> {
                 Expanded(
                   child: _QuickTool(
                     icon: Icons.bar_chart,
-                    iconBg: AppColors.specialTint,
-                    iconColor: AppColors.special,
+                    iconBg: AppTones.specialTint(context),
+                    iconColor: AppTones.special(context),
                     label: context.t('day_recap'),
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DayRecapScreen())),
                   ),
@@ -140,8 +140,8 @@ class _VisitsScreenState extends State<VisitsScreen> {
                 Expanded(
                   child: _QuickTool(
                     icon: Icons.map_outlined,
-                    iconBg: AppColors.successTint,
-                    iconColor: AppColors.success,
+                    iconBg: AppTones.successTint(context),
+                    iconColor: AppTones.success(context),
                     label: context.t('visits_map'),
                     badge: remaining > 0 ? '$remaining' : null,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const VisitsMapScreen())),
@@ -198,7 +198,7 @@ class _StatTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: selected ? AppColors.infoTint : Colors.transparent,
+          color: selected ? AppTones.infoTint(context) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -207,7 +207,7 @@ class _StatTile extends StatelessWidget {
             const SizedBox(height: 6),
             Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: color)),
             const SizedBox(height: 2),
-            Text(label, style: const TextStyle(color: AppColors.text, fontSize: 11)),
+            Text(label, style: TextStyle(color: Theme.of(context).brightness == Brightness.dark ? Colors.white : AppColors.text, fontSize: 11)),
           ],
         ),
       ),
@@ -256,7 +256,7 @@ class _QuickTool extends StatelessWidget {
                     top: -6,
                     child: Container(
                       padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(color: AppColors.danger, shape: BoxShape.circle),
+                      decoration: BoxDecoration(color: AppTones.danger(context), shape: BoxShape.circle),
                       constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
                       child: Text(badge!, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700)),
                     ),
