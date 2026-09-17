@@ -29,7 +29,7 @@ class SignaturePadState extends State<SignaturePad> {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: AppColors.divider),
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: GestureDetector(
         onPanStart: (d) {

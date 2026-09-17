@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../app_scope.dart';
 import '../../l10n.dart';
+import '../../theme.dart';
 import '../../widgets/common.dart';
 
 class DayRecapScreen extends StatelessWidget {
@@ -16,7 +17,7 @@ class DayRecapScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
           children: [
-            Text(context.t('day_recap_subtitle'), style: TextStyle(color: Colors.grey.shade600)),
+            Text(context.t('day_recap_subtitle'), style: const TextStyle(color: AppColors.textMuted)),
             const SizedBox(height: 18),
             Text(context.t('sales'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 10),

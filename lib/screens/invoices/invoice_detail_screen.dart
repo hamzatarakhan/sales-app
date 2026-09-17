@@ -30,7 +30,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                     invoice.status == InvoiceStatus.paid ? StatusBadge.paid(context) : StatusBadge.notPaid(context),
                   ],
                 ),
-                Text(invoice.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                Text(invoice.customerName, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                 const SizedBox(height: 14),
                 SectionCard(
                   child: Column(
@@ -123,7 +123,7 @@ class _LineRow extends StatelessWidget {
           ),
         ),
         Text('${line.qty} x ${line.unitPrice.toStringAsFixed(line.unitPrice.truncateToDouble() == line.unitPrice ? 0 : 1)}',
-            style: TextStyle(color: Colors.grey.shade600)),
+            style: const TextStyle(color: AppColors.textMuted)),
       ],
     );
   }

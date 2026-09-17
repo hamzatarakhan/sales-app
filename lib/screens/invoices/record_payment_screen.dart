@@ -38,7 +38,7 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(context.t('amount_due'), style: TextStyle(color: Colors.grey.shade600)),
+                  Text(context.t('amount_due'), style: const TextStyle(color: AppColors.textMuted)),
                   const SizedBox(height: 6),
                   Text('${fmtMoney(widget.invoice.due)} JOD', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                 ],
@@ -96,7 +96,7 @@ class _RecordPaymentScreenState extends State<RecordPaymentScreen> {
             const SizedBox(height: 16),
             Text(context.t('payment_recorded'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            Text(context.t('invoice_balance_updated'), textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600)),
+            Text(context.t('invoice_balance_updated'), textAlign: TextAlign.center, style: const TextStyle(color: AppColors.textMuted)),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -125,14 +125,14 @@ class _MethodBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(999),
       child: Container(
         height: 52,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: selected ? AppColors.primary : Colors.transparent,
           border: Border.all(color: AppColors.primary),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(999),
         ),
         child: Text(label, style: TextStyle(color: selected ? Colors.white : AppColors.primary, fontWeight: FontWeight.w700)),
       ),

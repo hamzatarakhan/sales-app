@@ -49,7 +49,11 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
       appBar: AppBar(title: Text(context.t('nav_invoices'))),
       body: SafeArea(
         top: false,
-        child: ListView(
+        child: RefreshIndicator(
+          color: AppColors.primary,
+          onRefresh: () => Future.delayed(const Duration(milliseconds: 600)),
+          child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
           children: [
             TextField(
@@ -72,12 +76,23 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('${invoices.length} invoices · outstanding', style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                  Text('${invoices.length} invoices · outstanding', style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                   Text('${fmtMoney(outstanding)} JOD', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12)),
                 ],
               ),
             ),
             const SizedBox(height: 12),
+            if (invoices.isEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                child: Column(
+                  children: [
+                    const Icon(Icons.receipt_long_outlined, size: 26, color: AppColors.textFaint),
+                    const SizedBox(height: 8),
+                    Text(context.t('no_invoices_found'), style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
+                  ],
+                ),
+              ),
             for (final inv in invoices) ...[
               InkWell(
                 borderRadius: BorderRadius.circular(16),
@@ -91,7 +106,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                           children: [
                             Text(inv.id, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
-                            Text(inv.customerName, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
+                            Text(inv.customerName, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
                           ],
                         ),
                       ),
@@ -104,7 +119,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                             style: TextStyle(
                               color: inv.status == InvoiceStatus.notPaid && inv.dueDate.isBefore(now)
                                   ? AppColors.danger
-                                  : Colors.grey.shade600,
+                                  : AppColors.textMuted,
                               fontSize: 11,
                             ),
                           ),
@@ -112,7 +127,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                           inv.status == InvoiceStatus.paid ? StatusBadge.paid(context) : StatusBadge.notPaid(context),
                         ],
                       ),
-                      Icon(Icons.chevron_right, color: Colors.grey.shade400),
+                      Icon(Directionality.of(context) == TextDirection.rtl ? Icons.chevron_left : Icons.chevron_right, color: AppColors.textFaint),
                     ],
                   ),
                 ),
@@ -120,6 +135,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
               const SizedBox(height: 12),
             ],
           ],
+          ),
         ),
       ),
     );

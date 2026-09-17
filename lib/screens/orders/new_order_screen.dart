@@ -121,8 +121,8 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             children: [
               Text(context.t('customer_signature'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
               const SizedBox(height: 8),
-              Text("Have the customer sign to confirm this order before it's finalized.",
-                  style: TextStyle(color: Colors.grey.shade600)),
+              const Text("Have the customer sign to confirm this order before it's finalized.",
+                  style: TextStyle(color: AppColors.textMuted)),
               const SizedBox(height: 16),
               SignaturePad(key: key, onChanged: (v) => setSheetState(() => hasSig = v)),
               const SizedBox(height: 16),
@@ -178,8 +178,8 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             const SizedBox(height: 16),
             Text(context.t('order_confirmed'), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            Text('Van stock was deducted and the invoice was created.',
-                textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600)),
+            const Text('Van stock was deducted and the invoice was created.',
+                textAlign: TextAlign.center, style: TextStyle(color: AppColors.textMuted)),
             const SizedBox(height: 8),
             Text('Invoice: ${invoice.id}', style: const TextStyle(fontWeight: FontWeight.w700)),
             const SizedBox(height: 20),
@@ -230,13 +230,13 @@ class _ProductRow extends StatelessWidget {
                     Text(product.name, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
                     const SizedBox(height: 4),
                     Text.rich(TextSpan(children: [
-                      TextSpan(text: '${fmtMoney(product.price)} JOD · ', style: TextStyle(color: Colors.grey.shade600)),
+                      TextSpan(text: '${fmtMoney(product.price)} JOD · ', style: const TextStyle(color: AppColors.textMuted)),
                       TextSpan(
                         text: product.isOut
                             ? 'Out of stock'
                             : '${product.vanStock} Case in van${product.isLow ? ' (low)' : ''}',
                         style: TextStyle(
-                          color: (product.isLow || product.isOut) ? AppColors.danger : Colors.grey.shade600,
+                          color: (product.isLow || product.isOut) ? AppColors.danger : AppColors.textMuted,
                           fontWeight: (product.isLow || product.isOut) ? FontWeight.w600 : FontWeight.normal,
                         ),
                       ),
@@ -251,7 +251,7 @@ class _ProductRow extends StatelessWidget {
             const Divider(height: 24),
             Row(
               children: [
-                Text('Discount', style: TextStyle(color: Colors.grey.shade600)),
+                const Text('Discount', style: TextStyle(color: AppColors.textMuted)),
                 const SizedBox(width: 10),
                 Wrap(
                   spacing: 6,
@@ -268,6 +268,33 @@ class _ProductRow extends StatelessWidget {
   }
 }
 
+void _promptQty(BuildContext context, int qty, int max, ValueChanged<int> onChanged) {
+  final controller = TextEditingController(text: '$qty');
+  showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: const Text('Quantity'),
+      content: TextField(
+        controller: controller,
+        autofocus: true,
+        keyboardType: TextInputType.number,
+        decoration: const InputDecoration(),
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+        TextButton(
+          onPressed: () {
+            final v = int.tryParse(controller.text.trim());
+            if (v != null) onChanged(v.clamp(0, max));
+            Navigator.pop(ctx);
+          },
+          child: const Text('Set'),
+        ),
+      ],
+    ),
+  );
+}
+
 class _Stepper extends StatelessWidget {
   const _Stepper({required this.qty, required this.onChanged, required this.max});
   final int qty;
@@ -279,7 +306,13 @@ class _Stepper extends StatelessWidget {
     return Row(
       children: [
         _StepBtn(icon: Icons.remove, onTap: qty > 0 ? () => onChanged(qty - 1) : null),
-        SizedBox(width: 32, child: Text('$qty', textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700))),
+        InkWell(
+          onTap: () => _promptQty(context, qty, max, onChanged),
+          child: SizedBox(
+            width: 32,
+            child: Text('$qty', textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+          ),
+        ),
         _StepBtn(icon: Icons.add, onTap: qty < max ? () => onChanged(qty + 1) : null),
       ],
     );
@@ -297,11 +330,11 @@ class _StepBtn extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        width: 32,
-        height: 32,
-        decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(8)),
+        width: 34,
+        height: 34,
+        decoration: BoxDecoration(color: AppColors.cardAlt, borderRadius: BorderRadius.circular(8)),
         alignment: Alignment.center,
-        child: Icon(icon, size: 18, color: onTap == null ? Colors.grey.shade400 : Colors.black87),
+        child: Icon(icon, size: 18, color: onTap == null ? AppColors.textFaint : AppColors.text),
       ),
     );
   }

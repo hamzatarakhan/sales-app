@@ -45,7 +45,7 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(context.t('ordered_from_location'),
-                    style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
+                    style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
               ),
             ),
             const SizedBox(height: 10),
@@ -110,7 +110,7 @@ class _Stat extends StatelessWidget {
     return Column(
       children: [
         Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: color)),
-        Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
+        Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
       ],
     );
   }
@@ -126,14 +126,14 @@ class _MapsOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(16),
       child: SectionCard(
         child: Row(
           children: [
             Icon(icon, color: AppColors.primary),
             const SizedBox(width: 14),
             Expanded(child: Text(label, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12))),
-            Icon(Icons.chevron_right, color: Colors.grey.shade400),
+            Icon(Directionality.of(context) == TextDirection.rtl ? Icons.chevron_left : Icons.chevron_right, color: AppColors.textFaint),
           ],
         ),
       ),
@@ -220,22 +220,23 @@ class _MapLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       constraints: const BoxConstraints(maxWidth: 180),
       margin: const EdgeInsets.only(bottom: 6),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.divider),
+        color: isDark ? AppColors.cardDark : AppColors.card,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: isDark ? AppColors.dividerDark : AppColors.divider),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11, color: Colors.black87)),
+          Text(title, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 11, color: isDark ? Colors.white : AppColors.text)),
           if (subtitle != null)
-            Text(subtitle!, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
+            Text(subtitle!, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
         ],
       ),
     );

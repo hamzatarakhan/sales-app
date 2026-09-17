@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../l10n.dart';
 import '../../models.dart';
+import '../../theme.dart';
 import '../../widgets/common.dart';
 
 class VanStockDetailScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class VanStockDetailScreen extends StatelessWidget {
           children: [
             Text(product.name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 4),
-            Text(product.sku, style: TextStyle(color: Colors.grey.shade600)),
+            Text(product.sku, style: const TextStyle(color: AppColors.textMuted)),
             const SizedBox(height: 14),
             SectionCard(
               child: Column(

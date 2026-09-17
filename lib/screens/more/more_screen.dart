@@ -30,8 +30,8 @@ class MoreScreen extends StatelessWidget {
                     children: [
                       Text(state.userName, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                       const SizedBox(height: 4),
-                      Text(state.userEmail, style: TextStyle(color: Colors.grey.shade600)),
-                      Text(state.userCompany, style: TextStyle(color: Colors.grey.shade500)),
+                      Text(state.userEmail, style: const TextStyle(color: AppColors.textMuted)),
+                      Text(state.userCompany, style: const TextStyle(color: AppColors.textFaint)),
                     ],
                   ),
                 ),
@@ -148,7 +148,7 @@ class MoreScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 _Row(
                   icon: Icons.logout,
-                  iconBg: const Color(0xFFFBE1DF),
+                  iconBg: AppColors.dangerTint,
                   iconColor: AppColors.danger,
                   title: context.t('sign_out'),
                   titleColor: AppColors.danger,
@@ -156,7 +156,7 @@ class MoreScreen extends StatelessWidget {
                   onTap: () => _confirmSignOut(context, state),
                 ),
                 const SizedBox(height: 20),
-                Center(child: Text('v1.0.0', style: TextStyle(color: Colors.grey.shade400))),
+                const Center(child: Text('v1.0.0', style: TextStyle(color: AppColors.textFaint))),
               ],
             ),
           ),
@@ -187,7 +187,7 @@ class MoreScreen extends StatelessWidget {
           children: [
             const Text('Sign out?', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
             const SizedBox(height: 4),
-            Text("You'll need to sign in again to use the app.", style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+            const Text("You'll need to sign in again to use the app.", style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: AppColors.danger),
@@ -226,7 +226,7 @@ class _IconBox extends StatelessWidget {
     return Container(
       width: 30,
       height: 30,
-      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(9)),
+      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(8)),
       child: Icon(icon, color: color, size: 15),
     );
   }
@@ -267,11 +267,11 @@ class _Row extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(title, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: titleColor)),
-                  if (subtitle != null) Text(subtitle!, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
+                  if (subtitle != null) Text(subtitle!, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
                 ],
               ),
             ),
-            if (showChevron) Icon(Icons.chevron_right, color: Colors.grey.shade400),
+            if (showChevron) Icon(Directionality.of(context) == TextDirection.rtl ? Icons.chevron_left : Icons.chevron_right, color: AppColors.textFaint),
           ],
         ),
       ),

@@ -44,11 +44,11 @@ class VisitDetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(visit.address, style: const TextStyle(fontWeight: FontWeight.w700)),
-                            Text(visit.city, style: TextStyle(color: Colors.grey.shade600)),
+                            Text(visit.city, style: const TextStyle(color: AppColors.textMuted)),
                           ],
                         ),
                       ),
-                      Icon(Icons.navigation_outlined, color: Colors.grey.shade400),
+                      const Icon(Icons.navigation_outlined, color: AppColors.textFaint),
                     ],
                   ),
                 ),
@@ -86,12 +86,12 @@ class VisitDetailScreen extends StatelessWidget {
                               Text(context.t('check_in'), style: const TextStyle(fontWeight: FontWeight.w700)),
                               Text(
                                 visit.checkedIn ? '${visit.checkInDistanceM}m away' : context.t('not_checked_in'),
-                                style: TextStyle(color: Colors.grey.shade600),
+                                style: const TextStyle(color: AppColors.textMuted),
                               ),
                             ],
                           ),
                         ),
-                        Icon(Icons.chevron_right, color: Colors.grey.shade400),
+                        Icon(Directionality.of(context) == TextDirection.rtl ? Icons.chevron_left : Icons.chevron_right, color: AppColors.textFaint),
                       ],
                     ),
                   ),
@@ -109,16 +109,16 @@ class VisitDetailScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Merchandising photo', style: TextStyle(color: Colors.grey.shade600)),
+                        const Text('Merchandising photo', style: TextStyle(color: AppColors.textMuted)),
                         const SizedBox(height: 10),
                         Container(
                           height: 140,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color: AppColors.divider,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           alignment: Alignment.center,
-                          child: Icon(Icons.image_outlined, size: 40, color: Colors.grey.shade600),
+                          child: const Icon(Icons.image_outlined, size: 40, color: AppColors.textMuted),
                         ),
                       ],
                     ),

@@ -39,16 +39,16 @@ class _CheckInScreenState extends State<CheckInScreen> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
           children: [
-            Text(
+            const Text(
               "Confirms you're at the customer's location using your phone's GPS.",
-              style: TextStyle(color: Colors.grey.shade700),
+              style: TextStyle(color: AppColors.text),
             ),
             const SizedBox(height: 16),
             SectionCard(
               child: Column(
                 children: [
                   if (_distanceM == null) ...[
-                    Text(context.t('not_located_yet'), style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                    Text(context.t('not_located_yet'), style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                   ] else ...[
                     Text(
                       '${_distanceM}m away',
@@ -71,15 +71,15 @@ class _CheckInScreenState extends State<CheckInScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(context.t('merch_photo_optional'), style: TextStyle(color: Colors.grey.shade700, fontWeight: FontWeight.w600)),
+                  Text(context.t('merch_photo_optional'), style: const TextStyle(color: AppColors.text, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 12),
                   if (_photo)
                     Container(
                       height: 140,
                       width: double.infinity,
-                      decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(12)),
+                      decoration: BoxDecoration(color: AppColors.divider, borderRadius: BorderRadius.circular(12)),
                       alignment: Alignment.center,
-                      child: Icon(Icons.check_circle, color: Colors.grey.shade600, size: 32),
+                      child: const Icon(Icons.check_circle, color: AppColors.textMuted, size: 32),
                     )
                   else
                     Center(
@@ -121,7 +121,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
             Container(
               width: 64,
               height: 64,
-              decoration: BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
+              decoration: const BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
               child: const Icon(Icons.check, color: AppColors.success, size: 32),
             ),
             const SizedBox(height: 16),
@@ -132,7 +132,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                   ? "Saved — but you're ${_distanceM}m from the customer's known location."
                   : 'Saved.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey.shade600),
+              style: const TextStyle(color: AppColors.textMuted),
             ),
             const SizedBox(height: 20),
             SizedBox(

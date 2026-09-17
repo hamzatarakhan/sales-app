@@ -54,7 +54,11 @@ class _VisitsScreenState extends State<VisitsScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: ListView(
+        child: RefreshIndicator(
+          color: AppColors.primary,
+          onRefresh: () => Future.delayed(const Duration(milliseconds: 600)),
+          child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
           children: [
             Row(
@@ -68,7 +72,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                           style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                       const SizedBox(height: 4),
                       Text('${_weekday[now.weekday - 1]}, ${_month[now.month - 1]} ${now.day}',
-                          style: TextStyle(color: Colors.grey.shade600)),
+                          style: const TextStyle(color: AppColors.textMuted)),
                     ],
                   ),
                 ),
@@ -101,7 +105,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
                       value: '$remaining',
                       label: context.t('filter_remaining'),
                       selected: _filter == _Filter.remaining,
-                      color: const Color(0xFFB07D12),
+                      color: AppColors.warning,
                       onTap: () => setState(() => _filter = _Filter.remaining),
                     ),
                   ),
@@ -163,6 +167,7 @@ class _VisitsScreenState extends State<VisitsScreen> {
               const SizedBox(height: 12),
             ],
           ],
+          ),
         ),
       ),
     );
@@ -202,7 +207,7 @@ class _StatTile extends StatelessWidget {
             const SizedBox(height: 6),
             Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: color)),
             const SizedBox(height: 2),
-            Text(label, style: TextStyle(color: Colors.grey.shade700, fontSize: 11)),
+            Text(label, style: const TextStyle(color: AppColors.text, fontSize: 11)),
           ],
         ),
       ),
@@ -242,7 +247,7 @@ class _QuickTool extends StatelessWidget {
                 Container(
                   width: 30,
                   height: 30,
-                  decoration: BoxDecoration(color: iconBg, borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: iconBg, borderRadius: BorderRadius.circular(8)),
                   child: Icon(icon, color: iconColor, size: 16),
                 ),
                 if (badge != null)
@@ -285,13 +290,13 @@ class _VisitCard extends StatelessWidget {
                 children: [
                   Text(visit.customerName, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                   const SizedBox(height: 4),
-                  Text('${visit.scheduledTime} · ${visit.city}', style: TextStyle(color: Colors.grey.shade600)),
+                  Text('${visit.scheduledTime} · ${visit.city}', style: const TextStyle(color: AppColors.textMuted)),
                 ],
               ),
             ),
             visit.status == VisitStatus.done ? StatusBadge.done(context) : StatusBadge.planned(context),
             const SizedBox(width: 6),
-            Icon(Icons.chevron_right, color: Colors.grey.shade400),
+            Icon(Directionality.of(context) == TextDirection.rtl ? Icons.chevron_left : Icons.chevron_right, color: AppColors.textFaint),
           ],
         ),
       ),

@@ -26,9 +26,9 @@ class SyncQueueScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.inbox_outlined, size: 48, color: Colors.grey.shade400),
+                    const Icon(Icons.inbox_outlined, size: 48, color: AppColors.textFaint),
                     const SizedBox(height: 12),
-                    Text(context.t('nothing_queued'), style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                    Text(context.t('nothing_queued'), style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                   ],
                 ),
               ),

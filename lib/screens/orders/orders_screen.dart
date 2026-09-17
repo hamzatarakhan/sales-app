@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../app_scope.dart';
 import '../../l10n.dart';
 import '../../models.dart';
+import '../../theme.dart';
 import '../../widgets/common.dart';
 import 'order_detail_screen.dart';
 
@@ -33,7 +34,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
       appBar: AppBar(title: Text(context.t('nav_orders'))),
       body: SafeArea(
         top: false,
-        child: ListView(
+        child: RefreshIndicator(
+          color: AppColors.primary,
+          onRefresh: () => Future.delayed(const Duration(milliseconds: 600)),
+          child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
           children: [
             TextField(
@@ -51,6 +56,17 @@ class _OrdersScreenState extends State<OrdersScreen> {
               ],
             ),
             const SizedBox(height: 12),
+            if (orders.isEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                child: Column(
+                  children: [
+                    const Icon(Icons.shopping_cart_outlined, size: 26, color: AppColors.textFaint),
+                    const SizedBox(height: 8),
+                    Text(context.t('no_orders_found'), style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
+                  ],
+                ),
+              ),
             for (final o in orders) ...[
               InkWell(
                 borderRadius: BorderRadius.circular(16),
@@ -64,7 +80,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           children: [
                             Text(o.id, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
-                            Text('${o.customerName} · ${fmtDate(o.date)}', style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
+                            Text('${o.customerName} · ${fmtDate(o.date)}', style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
                           ],
                         ),
                       ),
@@ -76,7 +92,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           o.status == OrderStatus.invoiced ? StatusBadge.invoiced(context) : StatusBadge.draft(context),
                         ],
                       ),
-                      Icon(Icons.chevron_right, color: Colors.grey.shade400),
+                      Icon(Directionality.of(context) == TextDirection.rtl ? Icons.chevron_left : Icons.chevron_right, color: AppColors.textFaint),
                     ],
                   ),
                 ),
@@ -84,6 +100,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
               const SizedBox(height: 12),
             ],
           ],
+          ),
         ),
       ),
     );

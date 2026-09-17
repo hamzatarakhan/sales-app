@@ -108,10 +108,10 @@ class _TabItem extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           mouseCursor: SystemMouseCursors.click,
-          borderRadius: BorderRadius.circular(14),
-          hoverColor: color.withOpacity(0.08),
-          splashColor: color.withOpacity(0.12),
-          highlightColor: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          hoverColor: color.withValues(alpha: 0.08),
+          splashColor: color.withValues(alpha: 0.12),
+          highlightColor: color.withValues(alpha: 0.1),
           // InkWell's hover/splash overlays already animate their
           // opacity in smoothly (Material's default ~200ms fade) --
           // no custom AnimatedContainer needed for this.

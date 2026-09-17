@@ -11,7 +11,7 @@ class DetailAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: _RoundButton(
-        icon: Icons.chevron_left,
+        icon: Directionality.of(context) == TextDirection.rtl ? Icons.chevron_right : Icons.chevron_left,
         onTap: () => Navigator.of(context).maybePop(),
       ),
       title: Text(title),
@@ -131,7 +131,7 @@ class KeyValueRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
+          Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 11)),
           trailing ??
               Text(value, style: valueStyle ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 11)),
         ],

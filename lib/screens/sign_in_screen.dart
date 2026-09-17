@@ -47,8 +47,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     decoration: InputDecoration(
                       hintText: 'you@company.com',
                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.divider)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.divider)),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.divider)),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.divider)),
                       focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.primary, width: 1.5)),
                     ),
                   ),
@@ -64,8 +64,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     onChanged: (_) => setState(() {}),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.divider)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: AppColors.divider)),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.divider)),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.divider)),
                       focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.primary, width: 1.5)),
                       suffixIcon: IconButton(
                         icon: Icon(
