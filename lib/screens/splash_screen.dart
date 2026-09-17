@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import '../l10n.dart';
 import '../theme.dart';
@@ -13,9 +12,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
-  double _progress = 0;
-  Timer? _timer;
-
   late final _entrance = AnimationController(vsync: this, duration: const Duration(milliseconds: 900))..forward();
   late final _logoScale = CurvedAnimation(parent: _entrance, curve: const Interval(0.0, 0.7, curve: Curves.easeOutBack));
   late final _logoFade = CurvedAnimation(parent: _entrance, curve: const Interval(0.0, 0.5, curve: Curves.easeOut));
@@ -26,15 +22,26 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     ..repeat(reverse: true);
   late final _pulseScale = Tween(begin: 1.0, end: 1.05).animate(CurvedAnimation(parent: _pulse, curve: Curves.easeInOut));
 
+  // A single smooth animation drives the progress bar instead of a 40ms
+  // polling Timer -- ties to the Ticker so it's frame-synced, not stepped.
+  late final _progressCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1800))
+    ..forward();
+  late final _progress = CurvedAnimation(parent: _progressCtrl, curve: Curves.easeInOutCubic);
+
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(const Duration(milliseconds: 40), (t) {
-      setState(() => _progress += 0.028);
-      if (_progress >= 1) {
-        t.cancel();
+    _progressCtrl.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const SignInScreen()),
+          PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 450),
+            pageBuilder: (_, __, ___) => const SignInScreen(),
+            transitionsBuilder: (_, anim, __, child) => FadeTransition(
+              opacity: CurvedAnimation(parent: anim, curve: Curves.easeOut),
+              child: child,
+            ),
+          ),
         );
       }
     });
@@ -42,9 +49,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   @override
   void dispose() {
-    _timer?.cancel();
     _entrance.dispose();
     _pulse.dispose();
+    _progressCtrl.dispose();
     super.dispose();
   }
 
@@ -84,11 +91,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(3),
-                child: LinearProgressIndicator(
-                  value: _progress.clamp(0, 1),
-                  minHeight: 4,
-                  backgroundColor: AppColors.divider,
-                  valueColor: const AlwaysStoppedAnimation(AppColors.primary),
+                child: AnimatedBuilder(
+                  animation: _progress,
+                  builder: (context, _) => LinearProgressIndicator(
+                    value: _progress.value,
+                    minHeight: 4,
+                    backgroundColor: AppColors.divider,
+                    valueColor: const AlwaysStoppedAnimation(AppColors.primary),
+                  ),
                 ),
               ),
             ),

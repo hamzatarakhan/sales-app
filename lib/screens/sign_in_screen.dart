@@ -21,6 +21,10 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final state = AppStateScope.of(context);
     final canSubmit = _user.text.trim().isNotEmpty && _pass.text.trim().isNotEmpty;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final titleColor = isDark ? Colors.white : AppColors.text;
+    final labelColor = isDark ? Colors.white70 : AppColors.textMuted;
+    final fieldBorder = isDark ? AppColors.dividerDark : AppColors.divider;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -32,13 +36,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 140),
                   const BrandIcon(size: 96),
                   const SizedBox(height: 24),
-                  Text(context.t('app_name'), style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: AppColors.text)),
+                  Text(context.t('app_name'), style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: titleColor)),
                   const SizedBox(height: 8),
                   Text(context.t('sign_in_subtitle'), style: const TextStyle(color: AppColors.textMuted, fontSize: 15)),
                   const SizedBox(height: 36),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(context.t('username_or_email'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: AppColors.text)),
+                    child: Text(context.t('username_or_email'), style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: labelColor)),
                   ),
                   const SizedBox(height: 8),
                   TextField(
@@ -47,15 +51,15 @@ class _SignInScreenState extends State<SignInScreen> {
                     decoration: InputDecoration(
                       hintText: 'you@company.com',
                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.divider)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.divider)),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: fieldBorder)),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: fieldBorder)),
                       focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.primary, width: 1.5)),
                     ),
                   ),
                   const SizedBox(height: 20),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(context.t('password'), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: AppColors.text)),
+                    child: Text(context.t('password'), style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: labelColor)),
                   ),
                   const SizedBox(height: 8),
                   TextField(
@@ -64,8 +68,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     onChanged: (_) => setState(() {}),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.divider)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.divider)),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: fieldBorder)),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: fieldBorder)),
                       focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(color: AppColors.primary, width: 1.5)),
                       suffixIcon: IconButton(
                         icon: Icon(

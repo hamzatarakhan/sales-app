@@ -86,8 +86,10 @@ ThemeData buildTheme(Brightness brightness) {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: card,
-      // design-system.html .m-search: border-radius 12px, padding 10px 14px.
-      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      // design-system.html .m-search literally specs padding 10px 14px, but
+      // that reads too short on a real touch target -- deliberately taller
+      // per repeated direct feedback. Radius stays at the documented 12px.
+      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       hintStyle: const TextStyle(color: AppColors.textFaint, fontSize: 13, fontWeight: FontWeight.w400),
       prefixIconColor: AppColors.textFaint,
       suffixIconColor: AppColors.textFaint,

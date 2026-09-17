@@ -54,7 +54,11 @@ class _VisitsMapScreenState extends State<VisitsMapScreen> {
                 onTap: () => setState(() => _located = true),
                 child: CustomPaint(
                   size: Size.infinite,
-                  painter: _MapPainter(visits: visits, located: _located),
+                  painter: _MapPainter(
+                    visits: visits,
+                    located: _located,
+                    isDark: Theme.of(context).brightness == Brightness.dark,
+                  ),
                   child: Stack(
                     children: [
                       if (_located) const _MeLabel(),
@@ -250,17 +254,38 @@ Offset _pinPosition(int index, int total, Size size) {
 }
 
 class _MapPainter extends CustomPainter {
-  _MapPainter({required this.visits, required this.located});
+  _MapPainter({required this.visits, required this.located, required this.isDark});
   final List<Visit> visits;
   final bool located;
+  final bool isDark;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final bg = Paint()..color = const Color(0xFF23262B);
-    canvas.drawRect(Offset.zero & size, bg);
+    // A real map tile is never a flat block color -- layer a base fill,
+    // a few soft "land parcel" blocks, then roads, so it reads as a map
+    // even without real tile data. Dark and light get independently
+    // tuned palettes (light isn't just an inverted dark).
+    final bgColor = isDark ? const Color(0xFF23262B) : const Color(0xFFE9EDF0);
+    final blockColor = isDark ? const Color(0xFF2A2E34) : const Color(0xFFDFE5E9);
+    final roadColor = isDark ? Colors.white24 : const Color(0xFFC7CFD4);
+
+    canvas.drawRect(Offset.zero & size, Paint()..color = bgColor);
+
+    final blockPaint = Paint()..color = blockColor;
+    final rand = _StableRandom(size.width.toInt());
+    for (int i = 0; i < 10; i++) {
+      final w = 40.0 + rand.next() * 70;
+      final h = 30.0 + rand.next() * 50;
+      final x = rand.next() * size.width;
+      final y = rand.next() * size.height;
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(Rect.fromLTWH(x, y, w, h), const Radius.circular(4)),
+        blockPaint,
+      );
+    }
 
     final roadPaint = Paint()
-      ..color = Colors.white24
+      ..color = roadColor
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
     for (double x = 0; x < size.width; x += 60) {
@@ -307,5 +332,18 @@ class _MapPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _MapPainter oldDelegate) => oldDelegate.located != located;
+  bool shouldRepaint(covariant _MapPainter oldDelegate) =>
+      oldDelegate.located != located || oldDelegate.isDark != isDark;
+}
+
+/// Deterministic pseudo-random sequence (fixed seed) so the map's decorative
+/// "land parcel" blocks stay put across repaints instead of jittering.
+class _StableRandom {
+  _StableRandom(int seed) : _state = seed == 0 ? 1 : seed;
+  int _state;
+
+  double next() {
+    _state = (_state * 1103515245 + 12345) & 0x7fffffff;
+    return _state / 0x7fffffff;
+  }
 }

@@ -51,8 +51,8 @@ class _RoundButton extends StatelessWidget {
           customBorder: const CircleBorder(),
           child: Center(
             child: Container(
-              width: 28,
-              height: 28,
+              width: 32,
+              height: 32,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: isDark ? Colors.white10 : Colors.white,
@@ -61,7 +61,7 @@ class _RoundButton extends StatelessWidget {
                 // border, never a floating/shadowed element.
                 border: Border.all(color: isDark ? AppColors.dividerDark : AppColors.divider),
               ),
-              child: Icon(icon, size: 16),
+              child: Icon(icon, size: 20, color: isDark ? Colors.white70 : AppColors.text),
             ),
           ),
         ),
